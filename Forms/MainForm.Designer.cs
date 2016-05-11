@@ -30,6 +30,7 @@
         {
             this.variablesListView = new System.Windows.Forms.ListView();
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.values = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.deleteVariable = new System.Windows.Forms.Button();
             this.addVariable = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.solveProblem = new System.Windows.Forms.Button();
             this.resultLabel = new System.Windows.Forms.Label();
             this.resultTextBox = new System.Windows.Forms.TextBox();
-            this.values = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +64,11 @@
             // 
             this.name.Text = "Имя переменной";
             this.name.Width = 104;
+            // 
+            // values
+            // 
+            this.values.Text = "Значения";
+            this.values.Width = 129;
             // 
             // groupBox1
             // 
@@ -117,6 +122,7 @@
             this.deleteRule.TabIndex = 2;
             this.deleteRule.Text = "Удалить";
             this.deleteRule.UseVisualStyleBackColor = true;
+            this.deleteRule.Click += new System.EventHandler(this.deleteRule_Click);
             // 
             // addRule
             // 
@@ -126,6 +132,7 @@
             this.addRule.TabIndex = 1;
             this.addRule.Text = "Добавить";
             this.addRule.UseVisualStyleBackColor = true;
+            this.addRule.Click += new System.EventHandler(this.addRule_Click);
             // 
             // rulesListView
             // 
@@ -176,11 +183,6 @@
             this.resultTextBox.ReadOnly = true;
             this.resultTextBox.Size = new System.Drawing.Size(162, 20);
             this.resultTextBox.TabIndex = 6;
-            // 
-            // values
-            // 
-            this.values.Text = "Значения";
-            this.values.Width = 129;
             // 
             // MainForm
             // 

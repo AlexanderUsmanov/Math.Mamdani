@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using FuzzyLogic.Mamdani.Statements;
 
 namespace FuzzyLogic.Mamdani
@@ -9,17 +8,22 @@ namespace FuzzyLogic.Mamdani
     /// </summary>
     public class Rule
     {
-        public List<Condition> Conditions { get; set; }
-        public Conclusion Conclusion { get; set; }
+        public readonly List<Condition> Conditions;
+        public readonly Conclusion Conclusion;
 
-        public void SetConditions(params Condition[] conditions)
+        public Rule(List<Condition> conditions, Conclusion conclusion)
         {
-            Conditions = conditions.ToList();
+            Conditions = conditions;
+            Conclusion = conclusion;
         }
 
-        public void SetConclusion(Conclusion conclusion)
+        public string[] ToStringArray()
         {
-            Conclusion = conclusion;
+            var list = new List<string>();
+            list.Add(string.Join(" & ", Conditions));
+            list.Add(Conclusion.ToString());
+
+            return list.ToArray();
         }
     }
 }

@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRuleForm.Designer.cs">
+      <DependentUpon>AddRuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddRuleStatementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddRuleStatementForm.Designer.cs">
+      <DependentUpon>AddRuleStatementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddVariableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddRuleForm.resx">
+      <DependentUpon>AddRuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddRuleStatementForm.resx">
+      <DependentUpon>AddRuleStatementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddVariableForm.resx">
       <DependentUpon>AddVariableForm.cs</DependentUpon>
     </EmbeddedResource>

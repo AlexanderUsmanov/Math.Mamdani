@@ -26,6 +26,8 @@ namespace Forms
             listView.Items.AddRange(listViewItems);
         }
 
+
+
         private void addValue_Click(object sender, System.EventArgs e)
         {
             var addVariableValueForm = new AddVariableValueForm();
@@ -42,6 +44,9 @@ namespace Forms
             _terms.Add(new Term(name, a, b, c, d));
             return true;
         }
+
+
+
 
         private void deleteValue_Click(object sender, System.EventArgs e)
         {

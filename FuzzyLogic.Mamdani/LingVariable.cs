@@ -12,22 +12,12 @@ namespace FuzzyLogic.Mamdani
         public int Id { get; set; }
 
 
-        private readonly List<Term> _termSet;
+        public readonly List<Term> Terms;
 
-        public LingVariable(string name, List<Term> termSet)
+        public LingVariable(string name, List<Term> terms)
         {
             Name = name;
-            _termSet = termSet;
-        }
-
-        public bool HasTerm(string termName)
-        {
-            return _termSet.Any(x => x.Name == termName);
-        }
-
-        public Term GetTerm(string termName)
-        {
-            return _termSet.FirstOrDefault(x => x.Name == termName);
+            Terms = terms;
         }
 
         public double GetValueForTerm(Term term, double x)
@@ -40,7 +30,7 @@ namespace FuzzyLogic.Mamdani
             var list = new List<string>
             {
                 Name,
-                string.Join(", ", _termSet.Select(x => x.Name))
+                string.Join(", ", Terms.Select(x => x.Name))
             };
             return list.ToArray();
         }

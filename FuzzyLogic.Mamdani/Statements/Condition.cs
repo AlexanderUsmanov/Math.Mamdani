@@ -5,8 +5,8 @@
     /// </summary>
     public class Condition : Statement
     {
-        public Condition(string name, string termName)
-            : base(name, termName)
+        public Condition(LingVariable variable, Term term)
+            : base(variable, term)
         {
         }
     }

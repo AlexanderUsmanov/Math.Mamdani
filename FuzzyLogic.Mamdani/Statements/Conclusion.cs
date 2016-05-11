@@ -5,8 +5,8 @@
     /// </summary>
     public class Conclusion : Statement
     {
-        public Conclusion(string name, string termName)
-            : base(name, termName)
+        public Conclusion(LingVariable variable, Term term)
+            : base(variable, term)
         {
         }
     }
