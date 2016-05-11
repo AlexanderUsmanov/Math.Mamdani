@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.conditionsListView = new System.Windows.Forms.ListView();
             this.variable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.conclusionListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.addCondition = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listView2);
+            this.groupBox1.Controls.Add(this.conditionsListView);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(356, 121);
@@ -55,18 +55,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Условия";
             // 
-            // listView2
+            // conditionsListView
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.conditionsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.variable,
             this.value});
-            this.listView2.GridLines = true;
-            this.listView2.Location = new System.Drawing.Point(6, 19);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(344, 96);
-            this.listView2.TabIndex = 0;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.conditionsListView.GridLines = true;
+            this.conditionsListView.Location = new System.Drawing.Point(6, 19);
+            this.conditionsListView.Name = "conditionsListView";
+            this.conditionsListView.Size = new System.Drawing.Size(344, 96);
+            this.conditionsListView.TabIndex = 0;
+            this.conditionsListView.UseCompatibleStateImageBehavior = false;
+            this.conditionsListView.View = System.Windows.Forms.View.Details;
             // 
             // variable
             // 
@@ -80,7 +80,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listView1);
+            this.groupBox2.Controls.Add(this.conclusionListView);
             this.groupBox2.Location = new System.Drawing.Point(13, 140);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(355, 79);
@@ -88,18 +88,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Результат";
             // 
-            // listView1
+            // conclusionListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.conclusionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(6, 19);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(344, 47);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.conclusionListView.GridLines = true;
+            this.conclusionListView.Location = new System.Drawing.Point(6, 19);
+            this.conclusionListView.Name = "conclusionListView";
+            this.conclusionListView.Size = new System.Drawing.Size(344, 47);
+            this.conclusionListView.TabIndex = 1;
+            this.conclusionListView.UseCompatibleStateImageBehavior = false;
+            this.conclusionListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -186,11 +186,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView conditionsListView;
         private System.Windows.Forms.ColumnHeader variable;
         private System.Windows.Forms.ColumnHeader value;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView conclusionListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button addCondition;

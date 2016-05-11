@@ -18,5 +18,10 @@
         {
             return LingVariable.Name + "=" + Term.Name;
         }
+
+        public string[] ToStringArray()
+        {
+            return new[] {LingVariable.Name, Term.Name};
+        }
     }
 }

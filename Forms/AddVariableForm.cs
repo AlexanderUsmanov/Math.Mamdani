@@ -65,6 +65,8 @@ namespace Forms
                 _terms.Remove(value);
         }
 
+
+
         public delegate bool AddVariableDelegate(string name, List<Term> terms);
 
         public event AddVariableDelegate OnAddVariable;

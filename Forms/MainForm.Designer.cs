@@ -43,6 +43,8 @@
             this.solveProblem = new System.Windows.Forms.Button();
             this.resultLabel = new System.Windows.Forms.Label();
             this.resultTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.inputDataTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -159,17 +161,18 @@
             // 
             // solveProblem
             // 
-            this.solveProblem.Location = new System.Drawing.Point(12, 201);
+            this.solveProblem.Location = new System.Drawing.Point(12, 225);
             this.solveProblem.Name = "solveProblem";
             this.solveProblem.Size = new System.Drawing.Size(218, 23);
             this.solveProblem.TabIndex = 4;
             this.solveProblem.Text = "Запустить решение задачи";
             this.solveProblem.UseVisualStyleBackColor = true;
+            this.solveProblem.Click += new System.EventHandler(this.solveProblem_Click);
             // 
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(298, 208);
+            this.resultLabel.Location = new System.Drawing.Point(298, 232);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(59, 13);
             this.resultLabel.TabIndex = 5;
@@ -178,11 +181,27 @@
             // resultTextBox
             // 
             this.resultTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultTextBox.Location = new System.Drawing.Point(385, 205);
+            this.resultTextBox.Location = new System.Drawing.Point(385, 229);
             this.resultTextBox.Name = "resultTextBox";
             this.resultTextBox.ReadOnly = true;
             this.resultTextBox.Size = new System.Drawing.Size(162, 20);
             this.resultTextBox.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 206);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(213, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Входные данные (через точку с запятой)";
+            // 
+            // inputDataTextBox
+            // 
+            this.inputDataTextBox.Location = new System.Drawing.Point(238, 202);
+            this.inputDataTextBox.Name = "inputDataTextBox";
+            this.inputDataTextBox.Size = new System.Drawing.Size(309, 20);
+            this.inputDataTextBox.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -190,7 +209,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(560, 233);
+            this.ClientSize = new System.Drawing.Size(560, 259);
+            this.Controls.Add(this.inputDataTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.resultTextBox);
             this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.solveProblem);
@@ -224,6 +245,8 @@
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.TextBox resultTextBox;
         private System.Windows.Forms.ColumnHeader values;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox inputDataTextBox;
     }
 }
 

@@ -21,7 +21,6 @@ namespace Forms
                 return names;
             }
         }
-
         private readonly List<LingVariable> _variables;
          
         public AddRuleForm(List<LingVariable> variables)
@@ -32,6 +31,29 @@ namespace Forms
             InitializeComponent();
         }
 
+
+
+        private void RefreshConditionsListView()
+        {
+            var values = _conditions.Select(x => x.ToStringArray());
+            RefreshListView(conditionsListView, values);
+        }
+        private void RefreshConclusionListView()
+        {
+            var values = new [] { _conclusion.ToStringArray()};
+            RefreshListView(conclusionListView, values);
+        }
+        public void RefreshListView(ListView listView, IEnumerable<string[]> values)
+        {
+            var listViewItems = values.Select(x => new ListViewItem(x)).ToArray();
+            listView.Items.Clear();
+            listView.Items.AddRange(listViewItems);
+        }
+
+
+
+
+
         private void addCondition_Click(object sender, System.EventArgs e)
         {
             var variablesForRuleStatement = _variables.Where(x => !UsedVariableNames.Contains(x.Name)).ToList();
@@ -39,8 +61,8 @@ namespace Forms
             addConditionForm.OnAddStatement += AddCondition;
             addConditionForm.ShowDialog();
 
+            RefreshConditionsListView();
         }
-
         private void AddCondition(string variableName, string termName)
         {
             var variable = _variables.FirstOrDefault(x => x.Name == variableName);
@@ -50,19 +72,25 @@ namespace Forms
             _conditions.Add(condition);
         }
 
+
         private void deleteCondition_Click(object sender, System.EventArgs e)
         {
             var deleteConditionForm = new DeleteValueForm(_conditions.Select(c => c.LingVariable.Name).ToArray());
             deleteConditionForm.OnDeleteItem += DeleteCondition;
             deleteConditionForm.ShowDialog();
-        }
 
+            RefreshConditionsListView();
+        }
         private void DeleteCondition(string variableName)
         {
             var condition = _conditions.FirstOrDefault(x => x.LingVariable.Name == variableName);
             if (condition != null)
                 _conditions.Remove(condition);
         }
+
+
+
+
 
         private void addConclusion_Click(object sender, System.EventArgs e)
         {
@@ -76,8 +104,9 @@ namespace Forms
             var addConditionForm = new AddRuleStatementForm(variablesForRuleStatement);
             addConditionForm.OnAddStatement += AddConclusion;
             addConditionForm.ShowDialog();
-        }
 
+            RefreshConclusionListView();
+        }
         private void AddConclusion(string variableName, string termName)
         {
             var variable = _variables.FirstOrDefault(x => x.Name == variableName);
@@ -86,6 +115,7 @@ namespace Forms
             _conclusion = new Conclusion(variable, term);
         }
 
+
         private void deleteConclusion_Click(object sender, System.EventArgs e)
         {
             if (_conclusion == null)
@@ -93,7 +123,12 @@ namespace Forms
                 MessageBox.Show("Заключение можно удалить только после заполнения", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             _conclusion = null;
+            RefreshConclusionListView();
         }
+
+
+
+
 
         public delegate void AddRuleDelegate(List<Condition> conditions, Conclusion conclusion);
         public event AddRuleDelegate OnAddRule;

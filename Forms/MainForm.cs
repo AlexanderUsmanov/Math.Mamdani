@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FuzzyLogic.Mamdani;
+using FuzzyLogic.Mamdani.Interfaces;
+using FuzzyLogic.Mamdani.Problems;
 using FuzzyLogic.Mamdani.Statements;
 
 namespace Forms
@@ -10,14 +12,15 @@ namespace Forms
     public partial class MainForm : Form
     {
         private readonly List<LingVariable> Variables = new List<LingVariable>();
-        private readonly List<Rule> Rules = new List<Rule>(); 
-        
+        private readonly List<Rule> Rules = new List<Rule>();
 
-        public MainForm()
+        private readonly IMamdaniService _mamdaniService;
+
+        public MainForm(IMamdaniService mamdaniService)
         {
+            _mamdaniService = mamdaniService;
             InitializeComponent();
         }
-
 
 
         private void RefreshListView(ListView listView, IEnumerable<string[]> values)
@@ -118,6 +121,61 @@ namespace Forms
             var rule = Rules.FirstOrDefault(x => string.Join(",", x.ToStringArray()) == ruleString);
             if (rule != null)
                 Rules.Remove(rule);
+        }
+
+        private void solveProblem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var inputData = GetInputData();
+
+                if (inputData.Length != Variables.Count - 1)
+                {
+                    throw new ArgumentException($"Некорректное число входных параметров. {inputData.Length} вместо ожидаемых {Variables.Count - 1}");
+                }
+
+                ProblemConditions conditions = new ProblemConditions();
+                foreach (var lingVariable in Variables)
+                {
+                    conditions.AddVariable(lingVariable);
+                }
+
+                foreach (var rule in Rules)
+                {
+                    conditions.AddRule(rule);
+                }
+
+                var problem = new Problem()
+                {
+                    InputData = inputData,
+                    ProblemConditions = conditions
+                };
+
+                _mamdaniService.SolveProblem(problem);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private double[] GetInputData()
+        {
+            var str = inputDataTextBox.Text;
+            var strs = str.Split(';');
+
+            var list = new List<double>();
+            foreach (var s in strs)
+            {
+                double value;
+                if (!double.TryParse(s, out value))
+                {
+                    throw new ArgumentException("Не корректно заполнены входные данные");
+                    MessageBox.Show("Не корректно заполнены входные данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                list.Add(value);
+            }
+            return list.ToArray();
         }
     }
 }
