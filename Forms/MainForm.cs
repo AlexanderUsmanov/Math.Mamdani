@@ -151,7 +151,10 @@ namespace Forms
                     ProblemConditions = conditions
                 };
 
-                _mamdaniService.SolveProblem(problem);
+                var result = _mamdaniService.SolveProblem(problem);
+                if (double.IsNaN(result) || double.IsInfinity(result))
+                    resultTextBox.Text = "Не удалось вычислить значение.";
+                resultTextBox.Text = result.ToString();
             }
             catch (ArgumentException exc)
             {
@@ -171,11 +174,26 @@ namespace Forms
                 if (!double.TryParse(s, out value))
                 {
                     throw new ArgumentException("Не корректно заполнены входные данные");
-                    MessageBox.Show("Не корректно заполнены входные данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 list.Add(value);
             }
             return list.ToArray();
+        }
+
+        private void problemSample1_Click(object sender, EventArgs e)
+        {
+            var problem = ProblemSamples.First();
+
+            Variables.Clear();
+            Variables.AddRange(problem.ProblemConditions.Variables);
+
+            Rules.Clear();
+            Rules.AddRange(problem.ProblemConditions.Rules);
+
+            inputDataTextBox.Text = string.Join(";", problem.InputData);
+
+            RefreshVariablesListView();
+            RefreshRulesListView();
         }
     }
 }

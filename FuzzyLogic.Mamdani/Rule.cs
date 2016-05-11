@@ -22,7 +22,7 @@ namespace FuzzyLogic.Mamdani
         public string[] ToStringArray()
         {
             var list = new List<string>();
-            list.Add(string.Join(" & ", Conditions));
+            list.Add(string.Join(" & ", Conditions.Select(x => x.ToString())));
             list.Add(Conclusion.ToString());
 
             return list.ToArray();
