@@ -1,4 +1,5 @@
-﻿using FuzzyLogic.Mamdani.Interfaces;
+﻿using System.Collections.Generic;
+using FuzzyLogic.Mamdani.Interfaces;
 
 namespace FuzzyLogic.Mamdani
 {
@@ -27,6 +28,13 @@ namespace FuzzyLogic.Mamdani
                 AccessoryFunc = AccessoryFunc.CopyFunc(),
                 Name = Name
             };
+        }
+
+        public string[] ToStringArray()
+        {
+            var list = new List<string> { Name };
+            list.AddRange(AccessoryFunc.ToStringArray());
+            return list.ToArray();
         }
     }
 }

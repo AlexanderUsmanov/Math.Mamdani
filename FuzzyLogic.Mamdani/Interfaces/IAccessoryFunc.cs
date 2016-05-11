@@ -7,5 +7,7 @@
         IAccessoryFunc CopyFunc();
         void SetActivatedValue(double x);
         double GetActivatedValue(double x);
+
+        string[] ToStringArray();
     }
 }

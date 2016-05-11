@@ -60,5 +60,10 @@ namespace FuzzyLogic.Mamdani
         {
             return System.Math.Min(GetValue(x), _activatedValue);
         }
+
+        public string[] ToStringArray()
+        {
+            return new[] { _a.ToString(), _b.ToString(), _c.ToString(), _d.ToString() };
+        }
     }
 }

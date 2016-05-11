@@ -34,5 +34,15 @@ namespace FuzzyLogic.Mamdani
         {
             return term.AccessoryFunc.GetValue(x);
         }
+
+        public string[] ToStringArray()
+        {
+            var list = new List<string>
+            {
+                Name,
+                string.Join(", ", _termSet.Select(x => x.Name))
+            };
+            return list.ToArray();
+        }
     }
 }
