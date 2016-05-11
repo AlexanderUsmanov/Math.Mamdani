@@ -156,7 +156,7 @@
             // conditions
             // 
             this.conditions.Text = "Условия";
-            this.conditions.Width = 179;
+            this.conditions.Width = 151;
             // 
             // conclusion
             // 
@@ -229,7 +229,7 @@
             // problemSample1
             // 
             this.problemSample1.Name = "problemSample1";
-            this.problemSample1.Size = new System.Drawing.Size(152, 22);
+            this.problemSample1.Size = new System.Drawing.Size(121, 22);
             this.problemSample1.Text = "Задача 1";
             this.problemSample1.Click += new System.EventHandler(this.problemSample1_Click);
             // 

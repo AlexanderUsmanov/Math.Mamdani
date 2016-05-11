@@ -18,7 +18,7 @@ namespace Forms
         private void deleteButton_Click(object sender, EventArgs e)
         {
             var closeWindow = true;
-            if (string.IsNullOrWhiteSpace(comboBox1.SelectedItem.ToString()))
+            if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()))
             {
                 MessageBox.Show("Выберите элемент для удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 closeWindow = false;

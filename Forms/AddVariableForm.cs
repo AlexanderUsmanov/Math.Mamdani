@@ -74,7 +74,7 @@ namespace Forms
         private void addVariable_Click(object sender, System.EventArgs e)
         {
             var closeWindow = true;
-            if (string.IsNullOrWhiteSpace(variableName.Text))
+            if (string.IsNullOrEmpty(variableName.Text))
             {
                 MessageBox.Show("Нужно задать имя переменной", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 closeWindow = false;

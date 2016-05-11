@@ -190,7 +190,7 @@ namespace Forms
             Rules.Clear();
             Rules.AddRange(problem.ProblemConditions.Rules);
 
-            inputDataTextBox.Text = string.Join(";", problem.InputData);
+            inputDataTextBox.Text = string.Join(";", problem.InputData.Select(x => x.ToString()).ToArray());
 
             RefreshVariablesListView();
             RefreshRulesListView();

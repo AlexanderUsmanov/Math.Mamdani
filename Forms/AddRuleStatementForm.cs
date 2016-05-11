@@ -28,7 +28,7 @@ namespace Forms
 
             if (OnAddStatement != null)
             {
-                if (!string.IsNullOrWhiteSpace(variableName) && !string.IsNullOrWhiteSpace(termName))
+                if (!string.IsNullOrEmpty(variableName) && !string.IsNullOrEmpty(termName))
                 {
                     OnAddStatement(variableName, termName);
                 }

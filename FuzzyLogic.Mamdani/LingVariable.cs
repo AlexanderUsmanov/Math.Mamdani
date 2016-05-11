@@ -30,7 +30,7 @@ namespace FuzzyLogic.Mamdani
             var list = new List<string>
             {
                 Name,
-                string.Join(", ", Terms.Select(x => x.Name))
+                string.Join(", ", Terms.Select(x => x.Name).ToArray())
             };
             return list.ToArray();
         }
