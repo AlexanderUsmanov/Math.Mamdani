@@ -61,6 +61,27 @@ namespace Forms {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;problemConditions&gt;
+        ///	&lt;variables&gt;
+        ///		&lt;variable name=&quot;X1&quot;&gt;
+        ///			&lt;term name=&quot;низкий&quot; 	a=&quot;0.0&quot; b=&quot;0.0&quot; c=&quot;0.3&quot; d=&quot;0.4&quot; /&gt;
+        ///			&lt;term name=&quot;средний&quot; 	a=&quot;0.3&quot; b=&quot;0.4&quot; c=&quot;0.6&quot; d=&quot;0.7&quot; /&gt;
+        ///			&lt;term name=&quot;высокий&quot; 	a=&quot;0.6&quot; b=&quot;0.7&quot; c=&quot;1.0&quot; d=&quot;1.0&quot; /&gt;
+        ///		&lt;/variable&gt;
+        ///		&lt;variable name=&quot;X2&quot;&gt;
+        ///			&lt;term name=&quot;неуд&quot; 	a=&quot;0.0&quot; b=&quot;0.0&quot; c=&quot;0.4&quot; d=&quot;0.5&quot; /&gt;
+        ///			&lt;term name=&quot;уд&quot; 	a=&quot;0.4&quot; b=&quot;0.5&quot; c=&quot;0.6&quot; d=&quot;0.7&quot; /&gt;
+        ///			&lt;term name=&quot;хор&quot; 	a=&quot;0.6&quot; b=&quot;0.7&quot; c=&quot;0.8&quot; d=&quot;0.9&quot; /&gt;
+        ///			&lt;term name=&quot;отл&quot; 	a=&quot;0.8&quot; b=&quot;0.9&quot; c=&quot;1.0&quot; d=&quot;1.0&quot; /&gt;
+        ///		&lt;/ [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string input3 {
+            get {
+                return ResourceManager.GetString("input3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TrapFuncDescription {

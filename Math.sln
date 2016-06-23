@@ -5,9 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic.Mamdani", "FuzzyLogic.Mamdani\FuzzyLogic.Mamdani.csproj", "{9F6F3E09-3CA4-473F-AF76-B45E622669DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms", "Forms\Forms.csproj", "{1A5DE926-2721-47BF-89F3-2E823727A19B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C07E6D3F-252A-45E0-8B67-B86393A48AC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic.Mamdani.UI", "FuzzyLogic.Mamdani.UI\FuzzyLogic.Mamdani.UI.csproj", "{1A5DE926-2721-47BF-89F3-2E823727A19B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,8 +24,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1A5DE926-2721-47BF-89F3-2E823727A19B} = {C07E6D3F-252A-45E0-8B67-B86393A48AC5}
 	EndGlobalSection
 EndGlobal
