@@ -180,7 +180,7 @@ namespace Forms
             return list.ToArray();
         }
 
-        private void problemSample2_Click(object sender, EventArgs e)
+        private void задача2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input2);
 
@@ -203,7 +203,7 @@ namespace Forms
             RefreshRulesListView();
         }
 
-        private void problemSample3_Click(object sender, EventArgs e)
+        private void задача3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
 
@@ -226,26 +226,51 @@ namespace Forms
             RefreshRulesListView();
         }
 
-        private void problemSample1_Click(object sender, EventArgs e)
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Файлы xml|*.xml";
+            ofd.Multiselect = false;
 
-            if (!result.Success)
+            var dialogResult = ofd.ShowDialog();
+            if (dialogResult == DialogResult.OK)
             {
-                MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (var stream = ofd.OpenFile())
+                {
+                    var result = ProblemSamples.ReadConditionsFromXmlStream(stream);
+
+                    if (!result.Success)
+                    {
+                        MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    Variables.Clear();
+                    Variables.AddRange(result.Data.Variables);
+
+                    Rules.Clear();
+                    Rules.AddRange(result.Data.Rules);
+
+                    inputDataTextBox.Text = "";
+
+                    RefreshVariablesListView();
+                    RefreshRulesListView();
+                }
             }
+        }
 
-            Variables.Clear();
-            Variables.AddRange(result.Data.Variables);
-
-            Rules.Clear();
-            Rules.AddRange(result.Data.Rules);
-
-            inputDataTextBox.Text = "0.8;0.68";
-
-            RefreshVariablesListView();
-            RefreshRulesListView();
+        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.Filter = "Файлы xml|*.xml";
+            var dialogResult = sfd.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                var filePath = sfd.FileName;
+                var conditions = new ProblemConditions(Variables, Rules);
+                ProblemSamples.WriteToFile(conditions, filePath);
+            }
         }
     }
 }

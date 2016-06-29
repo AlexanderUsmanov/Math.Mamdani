@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\ProblemConditionsParseException.cs" />
     <Compile Include="MamdaniService.cs" />
+    <Compile Include="Problems\ProblemConditionsWriter.cs" />
     <Compile Include="Problems\ProblemConditionsReader.cs" />
     <Compile Include="Problems\ProblemSamples.cs" />
     <Compile Include="Results\ExecutionResult.cs" />

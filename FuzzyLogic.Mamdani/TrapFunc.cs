@@ -1,4 +1,5 @@
-﻿using FuzzyLogic.Mamdani.Exceptions;
+﻿using System.Xml.Linq;
+using FuzzyLogic.Mamdani.Exceptions;
 using FuzzyLogic.Mamdani.Interfaces;
 
 namespace FuzzyLogic.Mamdani
@@ -64,6 +65,20 @@ namespace FuzzyLogic.Mamdani
         public string[] ToStringArray()
         {
             return new[] { _a.ToString(), _b.ToString(), _c.ToString(), _d.ToString() };
+        }
+
+        public XAttribute[] ToXAttributeArray(params string[] attributesNames)
+        {
+            if (attributesNames.Length == 4)
+            {
+                var result = new XAttribute[4];
+                result[0] = new XAttribute(attributesNames[0], _a.ToString());
+                result[1] = new XAttribute(attributesNames[1], _b.ToString());
+                result[2] = new XAttribute(attributesNames[2], _c.ToString());
+                result[3] = new XAttribute(attributesNames[3], _d.ToString());
+                return result;
+            }
+            return new XAttribute[0];
         }
     }
 }

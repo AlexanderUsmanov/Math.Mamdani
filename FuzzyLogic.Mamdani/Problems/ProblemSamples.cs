@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
-using System.Xml.Linq;
 using FuzzyLogic.Mamdani.Exceptions;
 using FuzzyLogic.Mamdani.Results;
 
@@ -130,6 +128,11 @@ namespace FuzzyLogic.Mamdani.Problems
             {
                 return ExecutionResult<ProblemConditions>.Error(e);
             }
+        }
+
+        public static void WriteToFile(ProblemConditions conditions, string filePath)
+        {
+            ProblemConditionsWriter.WriteXmlToFile(conditions, filePath);
         }
     }
 }
