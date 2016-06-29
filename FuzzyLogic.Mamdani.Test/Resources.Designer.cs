@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Forms {
+namespace FuzzyLogic.Mamdani.Test {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Forms {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Forms.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FuzzyLogic.Mamdani.Test.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -64,27 +64,6 @@ namespace Forms {
         ///   Ищет локализованную строку, похожую на &lt;problemConditions&gt;
         ///	&lt;variables&gt;
         ///		&lt;variable name=&quot;X1&quot;&gt;
-        ///			&lt;term name=&quot;отсутствует&quot; 	a=&quot;0.0&quot; b=&quot;0.0&quot; c=&quot;0.1&quot; d=&quot;0.2&quot; /&gt;
-        ///			&lt;term name=&quot;низкая&quot; 		a=&quot;0.1&quot; b=&quot;0.2&quot; c=&quot;0.3&quot; d=&quot;0.4&quot; /&gt;
-        ///			&lt;term name=&quot;средняя&quot; 		a=&quot;0.3&quot; b=&quot;0.4&quot; c=&quot;0.6&quot; d=&quot;0.7&quot; /&gt;
-        ///			&lt;term name=&quot;высокая&quot; 		a=&quot;0.6&quot; b=&quot;0.7&quot; c=&quot;0.85&quot; d=&quot;0.95&quot; /&gt;
-        ///			&lt;term name=&quot;полное&quot; 		a=&quot;0.85&quot; b=&quot;0.95&quot; c=&quot;1.0&quot; d=&quot;1.0&quot; /&gt;
-        ///		&lt;/variable&gt;
-        ///		
-        ///		&lt;variable name=&quot;X2&quot;&gt;
-        ///			&lt;term name=&quot;отсутствует&quot; 	a=&quot;0.0&quot; b=&quot;0.0&quot; c=&quot;0.1&quot; d=&quot;0.2&quot; /&gt;
-        ///			&lt;term name=&quot;низкая&quot; 		a=&quot;0.1&quot; b=&quot;0.2&quot; c [остаток строки не уместился]&quot;;.
-        /// </summary>
-        internal static string input2 {
-            get {
-                return ResourceManager.GetString("input2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на &lt;problemConditions&gt;
-        ///	&lt;variables&gt;
-        ///		&lt;variable name=&quot;X1&quot;&gt;
         ///			&lt;term name=&quot;низкий&quot; 	a=&quot;0.0&quot; b=&quot;0.0&quot; c=&quot;0.3&quot; d=&quot;0.4&quot; /&gt;
         ///			&lt;term name=&quot;средний&quot; 	a=&quot;0.3&quot; b=&quot;0.4&quot; c=&quot;0.6&quot; d=&quot;0.7&quot; /&gt;
         ///			&lt;term name=&quot;высокий&quot; 	a=&quot;0.6&quot; b=&quot;0.7&quot; c=&quot;1.0&quot; d=&quot;1.0&quot; /&gt;
@@ -97,19 +76,9 @@ namespace Forms {
         ///		&lt;/variable&gt;
         ///		 [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string input3 {
+        internal static string input {
             get {
-                return ResourceManager.GetString("input3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TrapFuncDescription {
-            get {
-                object obj = ResourceManager.GetObject("TrapFuncDescription", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("input", resourceCulture);
             }
         }
     }

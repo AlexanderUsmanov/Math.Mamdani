@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic.Mamdani", "FuzzyLogic.Mamdani\FuzzyLogic.Mamdani.csproj", "{9F6F3E09-3CA4-473F-AF76-B45E622669DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic.Mamdani.UI", "FuzzyLogic.Mamdani.UI\FuzzyLogic.Mamdani.UI.csproj", "{1A5DE926-2721-47BF-89F3-2E823727A19B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic.Mamdani.Test", "FuzzyLogic.Mamdani.Test\FuzzyLogic.Mamdani.Test.csproj", "{4D79FDA6-E01A-472F-BD3E-909A1D2ABF56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1A5DE926-2721-47BF-89F3-2E823727A19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A5DE926-2721-47BF-89F3-2E823727A19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A5DE926-2721-47BF-89F3-2E823727A19B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D79FDA6-E01A-472F-BD3E-909A1D2ABF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D79FDA6-E01A-472F-BD3E-909A1D2ABF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D79FDA6-E01A-472F-BD3E-909A1D2ABF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D79FDA6-E01A-472F-BD3E-909A1D2ABF56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

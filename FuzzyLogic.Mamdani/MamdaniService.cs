@@ -21,6 +21,16 @@ namespace FuzzyLogic.Mamdani
             return defuzzificationResult;
         }
 
+        public double SolveProblem(ProblemConditions conditions, double[] input)
+        {
+            var problem = new Problem
+            {
+                InputData = input,
+                ProblemConditions = conditions
+            };
+            return SolveProblem(problem);
+        }
+
         public string GetLog => _logBuilder?.ToString();
 
         private double[] Fuzzificate(Problem problem)

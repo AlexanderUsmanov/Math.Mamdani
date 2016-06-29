@@ -17,6 +17,12 @@ namespace FuzzyLogic.Mamdani.Problems
             Rules = new List<Rule>();
         }
 
+        public ProblemConditions(List<LingVariable> variables, List<Rule> rules)
+        {
+            Variables = variables;
+            Rules = rules;
+        }
+
         public int NumberOfConditions
         {
             get { return Rules.Select(x => x.Conditions.Count).Sum(); }

@@ -46,8 +46,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.inputDataTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.заполнитьПоШаблонуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.problemSample1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fillFromTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.problemSample2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.problemSample3 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -211,27 +212,35 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.заполнитьПоШаблонуToolStripMenuItem});
+            this.fillFromTemplateToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(560, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // заполнитьПоШаблонуToolStripMenuItem
+            // fillFromTemplateToolStripMenuItem
             // 
-            this.заполнитьПоШаблонуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.problemSample1});
-            this.заполнитьПоШаблонуToolStripMenuItem.Name = "заполнитьПоШаблонуToolStripMenuItem";
-            this.заполнитьПоШаблонуToolStripMenuItem.Size = new System.Drawing.Size(149, 20);
-            this.заполнитьПоШаблонуToolStripMenuItem.Text = "Заполнить по шаблону";
+            this.fillFromTemplateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.problemSample2,
+            this.problemSample3});
+            this.fillFromTemplateToolStripMenuItem.Name = "fillFromTemplateToolStripMenuItem";
+            this.fillFromTemplateToolStripMenuItem.Size = new System.Drawing.Size(149, 20);
+            this.fillFromTemplateToolStripMenuItem.Text = "Заполнить по шаблону";
             // 
-            // problemSample1
+            // problemSample2
             // 
-            this.problemSample1.Name = "problemSample1";
-            this.problemSample1.Size = new System.Drawing.Size(121, 22);
-            this.problemSample1.Text = "Задача 1";
-            this.problemSample1.Click += new System.EventHandler(this.problemSample1_Click);
+            this.problemSample2.Name = "problemSample2";
+            this.problemSample2.Size = new System.Drawing.Size(121, 22);
+            this.problemSample2.Text = "Задача 2";
+            this.problemSample2.Click += new System.EventHandler(this.problemSample2_Click);
+            // 
+            // problemSample3
+            // 
+            this.problemSample3.Name = "problemSample3";
+            this.problemSample3.Size = new System.Drawing.Size(121, 22);
+            this.problemSample3.Text = "Задача 3";
+            this.problemSample3.Click += new System.EventHandler(this.problemSample3_Click);
             // 
             // MainForm
             // 
@@ -282,8 +291,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox inputDataTextBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem заполнитьПоШаблонуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem problemSample1;
+        private System.Windows.Forms.ToolStripMenuItem fillFromTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem problemSample2;
+        private System.Windows.Forms.ToolStripMenuItem problemSample3;
     }
 }
 

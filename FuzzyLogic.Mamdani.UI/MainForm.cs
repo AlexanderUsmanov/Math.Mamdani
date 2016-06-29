@@ -171,7 +171,7 @@ namespace Forms
             foreach (var s in strs)
             {
                 double value;
-                if (!double.TryParse(s, out value))
+                if (!double.TryParse(s.Replace(".", ","), out value))
                 {
                     throw new ArgumentException("Не корректно заполнены входные данные");
                 }
@@ -180,17 +180,69 @@ namespace Forms
             return list.ToArray();
         }
 
-        private void problemSample1_Click(object sender, EventArgs e)
+        private void problemSample2_Click(object sender, EventArgs e)
         {
-            var problem = ProblemSamples.First();
+            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input2);
+
+            if (!result.Success)
+            {
+                MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Variables.Clear();
-            Variables.AddRange(problem.ProblemConditions.Variables);
+            Variables.AddRange(result.Data.Variables);
 
             Rules.Clear();
-            Rules.AddRange(problem.ProblemConditions.Rules);
+            Rules.AddRange(result.Data.Rules);
 
-            inputDataTextBox.Text = string.Join(";", problem.InputData.Select(x => x.ToString()).ToArray());
+            inputDataTextBox.Text = "0.8;0.97;0.58;0.75;0.95";
+
+            RefreshVariablesListView();
+            RefreshRulesListView();
+        }
+
+        private void problemSample3_Click(object sender, EventArgs e)
+        {
+            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
+
+            if (!result.Success)
+            {
+                MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Variables.Clear();
+            Variables.AddRange(result.Data.Variables);
+
+            Rules.Clear();
+            Rules.AddRange(result.Data.Rules);
+
+            inputDataTextBox.Text = "0.8;0.68";
+
+            RefreshVariablesListView();
+            RefreshRulesListView();
+        }
+
+        private void problemSample1_Click(object sender, EventArgs e)
+        {
+            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
+
+            if (!result.Success)
+            {
+                MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Variables.Clear();
+            Variables.AddRange(result.Data.Variables);
+
+            Rules.Clear();
+            Rules.AddRange(result.Data.Rules);
+
+            inputDataTextBox.Text = "0.8;0.68";
 
             RefreshVariablesListView();
             RefreshRulesListView();

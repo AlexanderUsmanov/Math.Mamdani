@@ -117,14 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TrapFuncDescription" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Images\TrapFuncDescription.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProblemConditionsNodeName" xml:space="preserve">
+    <value>problemConditions</value>
+    <comment>элемент входного xml файла содержащий условия задачи</comment>
   </data>
-  <data name="input2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\input2.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="RuleNodeInputSectionName" xml:space="preserve">
+    <value>input</value>
   </data>
-  <data name="input3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\input3.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="RuleNodeName" xml:space="preserve">
+    <value>rule</value>
+  </data>
+  <data name="RuleNodeOutputSectionName" xml:space="preserve">
+    <value>output</value>
+  </data>
+  <data name="RulesNodeName" xml:space="preserve">
+    <value>rules</value>
+  </data>
+  <data name="RuleVariableNodeName" xml:space="preserve">
+    <value>variable</value>
+  </data>
+  <data name="RuleVariableNodeNameAttribute" xml:space="preserve">
+    <value>name</value>
+  </data>
+  <data name="RuleVariableNodeValueAttribute" xml:space="preserve">
+    <value>value</value>
+  </data>
+  <data name="TermAPointAttributeName" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="TermBPointAttributeName" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="TermCPointAttributeName" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="TermDPointAttributeName" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="TermNodeName" xml:space="preserve">
+    <value>term</value>
+  </data>
+  <data name="TermNodeNameAttribute" xml:space="preserve">
+    <value>name</value>
+  </data>
+  <data name="VariableNodeName" xml:space="preserve">
+    <value>variable</value>
+  </data>
+  <data name="VariableNodeNameAttribute" xml:space="preserve">
+    <value>name</value>
+  </data>
+  <data name="VariablesNodeName" xml:space="preserve">
+    <value>variables</value>
   </data>
 </root>
