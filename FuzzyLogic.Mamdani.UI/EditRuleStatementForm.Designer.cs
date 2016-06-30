@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class AddRuleStatementForm
+    partial class EditRuleStatementForm
     {
         /// <summary>
         /// Required designer variable.

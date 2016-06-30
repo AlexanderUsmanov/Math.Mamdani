@@ -32,9 +32,11 @@ namespace FuzzyLogic.Mamdani
 
         public string[] ToStringArray()
         {
-            var list = new List<string> { Name };
-            list.AddRange(AccessoryFunc.ToStringArray());
-            return list.ToArray();
+            var trapFunc = AccessoryFunc as TrapFunc;
+            if (trapFunc == null)
+                return new string[0];
+
+            return new[] { Name, trapFunc.A.ToString(), trapFunc.B.ToString(), trapFunc.C.ToString(), trapFunc.D.ToString()};
         }
     }
 }

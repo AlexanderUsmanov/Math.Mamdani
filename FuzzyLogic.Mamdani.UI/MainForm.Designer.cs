@@ -47,16 +47,19 @@ namespace Forms
             this.resultTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.inputDataTextBox = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.заполнитьПоШаблонуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.задача2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.задача3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.task1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.task2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.task3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // variablesListView
@@ -64,13 +67,16 @@ namespace Forms
             this.variablesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.name,
             this.values});
+            this.variablesListView.FullRowSelect = true;
             this.variablesListView.GridLines = true;
             this.variablesListView.Location = new System.Drawing.Point(6, 19);
+            this.variablesListView.MultiSelect = false;
             this.variablesListView.Name = "variablesListView";
             this.variablesListView.Size = new System.Drawing.Size(262, 120);
             this.variablesListView.TabIndex = 1;
             this.variablesListView.UseCompatibleStateImageBehavior = false;
             this.variablesListView.View = System.Windows.Forms.View.Details;
+            this.variablesListView.DoubleClick += new System.EventHandler(this.editVariable_Click);
             // 
             // name
             // 
@@ -89,7 +95,7 @@ namespace Forms
             this.groupBox1.Controls.Add(this.variablesListView);
             this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(274, 183);
+            this.groupBox1.Size = new System.Drawing.Size(274, 176);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Переменные";
@@ -121,7 +127,7 @@ namespace Forms
             this.groupBox2.Controls.Add(this.rulesListView);
             this.groupBox2.Location = new System.Drawing.Point(292, 32);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(261, 182);
+            this.groupBox2.Size = new System.Drawing.Size(261, 175);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Правила вывода";
@@ -151,6 +157,7 @@ namespace Forms
             this.rulesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.conditions,
             this.conclusion});
+            this.rulesListView.FullRowSelect = true;
             this.rulesListView.GridLines = true;
             this.rulesListView.Location = new System.Drawing.Point(6, 18);
             this.rulesListView.Name = "rulesListView";
@@ -158,6 +165,7 @@ namespace Forms
             this.rulesListView.TabIndex = 0;
             this.rulesListView.UseCompatibleStateImageBehavior = false;
             this.rulesListView.View = System.Windows.Forms.View.Details;
+            this.rulesListView.DoubleClick += new System.EventHandler(this.editRule_Click);
             // 
             // conditions
             // 
@@ -171,7 +179,7 @@ namespace Forms
             // 
             // solveProblem
             // 
-            this.solveProblem.Location = new System.Drawing.Point(12, 244);
+            this.solveProblem.Location = new System.Drawing.Point(12, 236);
             this.solveProblem.Name = "solveProblem";
             this.solveProblem.Size = new System.Drawing.Size(218, 23);
             this.solveProblem.TabIndex = 4;
@@ -182,7 +190,7 @@ namespace Forms
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(298, 251);
+            this.resultLabel.Location = new System.Drawing.Point(298, 243);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(59, 13);
             this.resultLabel.TabIndex = 5;
@@ -192,7 +200,7 @@ namespace Forms
             // 
             this.resultTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.resultTextBox.Enabled = false;
-            this.resultTextBox.Location = new System.Drawing.Point(385, 248);
+            this.resultTextBox.Location = new System.Drawing.Point(385, 240);
             this.resultTextBox.Name = "resultTextBox";
             this.resultTextBox.ReadOnly = true;
             this.resultTextBox.Size = new System.Drawing.Size(162, 20);
@@ -201,7 +209,7 @@ namespace Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 225);
+            this.label1.Location = new System.Drawing.Point(18, 216);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 13);
             this.label1.TabIndex = 7;
@@ -209,61 +217,89 @@ namespace Forms
             // 
             // inputDataTextBox
             // 
-            this.inputDataTextBox.Location = new System.Drawing.Point(238, 221);
+            this.inputDataTextBox.Location = new System.Drawing.Point(238, 213);
             this.inputDataTextBox.Name = "inputDataTextBox";
             this.inputDataTextBox.Size = new System.Drawing.Size(309, 20);
             this.inputDataTextBox.TabIndex = 8;
             // 
-            // menuStrip1
+            // mainMenuStrip
             // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(560, 24);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.Items.AddRange(new ToolStripItemCollection(this.menuStrip1, new[] {файлToolStripMenuItem}));
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Size = new System.Drawing.Size(560, 24);
+            this.mainMenuStrip.TabIndex = 9;
+            this.mainMenuStrip.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.файлToolStripMenuItem.Text = "Файл";
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItemCollection(this.menuStrip1, new [] {открытьToolStripMenuItem, заполнитьПоШаблонуToolStripMenuItem, сохранитьКакToolStripMenuItem}));
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.fillToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.fileToolStripMenuItem.Text = "Файл";
             // 
-            // открытьToolStripMenuItem
+            // openToolStripMenuItem
             // 
-            this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.открытьToolStripMenuItem.Text = "Открыть";
-            this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.openToolStripMenuItem.Text = "Открыть";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // заполнитьПоШаблонуToolStripMenuItem
+            // fillToolStripMenuItem
             // 
-            this.заполнитьПоШаблонуToolStripMenuItem.Name = "заполнитьПоШаблонуToolStripMenuItem";
-            this.заполнитьПоШаблонуToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.заполнитьПоШаблонуToolStripMenuItem.Text = "Заполнить по шаблону";
-            this.заполнитьПоШаблонуToolStripMenuItem.DropDownItems.AddRange(new ToolStripItemCollection(this.menuStrip1, new [] { задача2ToolStripMenuItem, задача3ToolStripMenuItem}));
+            this.fillToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.task1ToolStripMenuItem,
+            this.task2ToolStripMenuItem,
+            this.task3ToolStripMenuItem});
+            this.fillToolStripMenuItem.Name = "fillToolStripMenuItem";
+            this.fillToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.fillToolStripMenuItem.Text = "Заполнить по шаблону";
             // 
-            // сохранитьКакToolStripMenuItem
+            // task1ToolStripMenuItem
             // 
-            this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.сохранитьКакToolStripMenuItem.Text = "Сохранить как";
-            this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
+            this.task1ToolStripMenuItem.Name = "task1ToolStripMenuItem";
+            this.task1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.task1ToolStripMenuItem.Text = "Задача 1";
+            this.task1ToolStripMenuItem.Click += new System.EventHandler(this.task1ToolStripMenuItem_Click);
             // 
-            // задача2ToolStripMenuItem
+            // task2ToolStripMenuItem
             // 
-            this.задача2ToolStripMenuItem.Name = "задача2ToolStripMenuItem";
-            this.задача2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.задача2ToolStripMenuItem.Text = "Задача 2";
-            this.задача2ToolStripMenuItem.Click += new System.EventHandler(this.задача2ToolStripMenuItem_Click);
+            this.task2ToolStripMenuItem.Name = "task2ToolStripMenuItem";
+            this.task2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.task2ToolStripMenuItem.Text = "Задача 2";
+            this.task2ToolStripMenuItem.Click += new System.EventHandler(this.task2ToolStripMenuItem_Click);
             // 
-            // задача3ToolStripMenuItem
+            // task3ToolStripMenuItem
             // 
-            this.задача3ToolStripMenuItem.Name = "задача3ToolStripMenuItem";
-            this.задача3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.задача3ToolStripMenuItem.Text = "Задача 3";
-            this.задача3ToolStripMenuItem.Click += new System.EventHandler(this.задача3ToolStripMenuItem_Click);
+            this.task3ToolStripMenuItem.Name = "task3ToolStripMenuItem";
+            this.task3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.task3ToolStripMenuItem.Text = "Задача 3";
+            this.task3ToolStripMenuItem.Click += new System.EventHandler(this.task3ToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.saveAsToolStripMenuItem.Text = "Сохранить как";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.exitToolStripMenuItem.Text = "Выход";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -271,7 +307,7 @@ namespace Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(560, 278);
+            this.ClientSize = new System.Drawing.Size(560, 267);
             this.Controls.Add(this.inputDataTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resultTextBox);
@@ -279,16 +315,15 @@ namespace Forms
             this.Controls.Add(this.solveProblem);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.mainMenuStrip);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Алгоритм Мамдани";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,13 +348,16 @@ namespace Forms
         private System.Windows.Forms.ColumnHeader values;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox inputDataTextBox;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem заполнитьПоШаблонуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem задача2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem задача3ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
+        private MenuStrip mainMenuStrip;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem fillToolStripMenuItem;
+        private ToolStripMenuItem task1ToolStripMenuItem;
+        private ToolStripMenuItem task2ToolStripMenuItem;
+        private ToolStripMenuItem task3ToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

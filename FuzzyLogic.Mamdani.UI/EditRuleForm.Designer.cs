@@ -1,6 +1,6 @@
 ﻿namespace Forms
 {
-    partial class AddRuleForm
+    partial class EditRuleForm
     {
         /// <summary>
         /// Required designer variable.

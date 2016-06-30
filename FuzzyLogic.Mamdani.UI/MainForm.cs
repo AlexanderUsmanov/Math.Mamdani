@@ -5,14 +5,13 @@ using System.Windows.Forms;
 using FuzzyLogic.Mamdani;
 using FuzzyLogic.Mamdani.Interfaces;
 using FuzzyLogic.Mamdani.Problems;
-using FuzzyLogic.Mamdani.Statements;
 
 namespace Forms
 {
     public partial class MainForm : Form
     {
-        private readonly List<LingVariable> Variables = new List<LingVariable>();
-        private readonly List<Rule> Rules = new List<Rule>();
+        private readonly List<LingVariable> _variables = new List<LingVariable>();
+        private readonly List<Rule> _rules = new List<Rule>();
 
         private readonly IMamdaniService _mamdaniService;
 
@@ -22,7 +21,7 @@ namespace Forms
             InitializeComponent();
         }
 
-
+        #region private
         private void RefreshListView(ListView listView, IEnumerable<string[]> values)
         {
             var listViewItems = values.Select(x => new ListViewItem(x)).ToArray();
@@ -32,95 +31,127 @@ namespace Forms
 
         private void RefreshVariablesListView()
         {
-            var values = Variables.Select(x => x.ToStringArray());
+            var values = _variables.Select(x => x.ToStringArray());
             RefreshListView(variablesListView, values);
         }
 
         private void RefreshRulesListView()
         {
-            var rules = Rules.Select(x => x.ToStringArray());
+            var rules = _rules.Select(x => x.ToStringArray());
             RefreshListView(rulesListView, rules);
         }
 
+        private double[] GetInputData()
+        {
+            var str = inputDataTextBox.Text;
+            var strs = str.Split(';');
 
+            var list = new List<double>();
+            foreach (var s in strs)
+            {
+                double value;
+                if (!double.TryParse(s.Replace(".", ","), out value))
+                {
+                    throw new ArgumentException("Не корректно заполнены входные данные");
+                }
+                list.Add(value);
+            }
+            return list.ToArray();
+        }
+        #endregion
 
-
-
+        #region Events
         private void addVariable_Click(object sender, EventArgs e)
         {
-            var addVariableForm = new AddVariableForm();
-            addVariableForm.OnAddVariable += AddVariable;
+            var addVariableForm = new EditVariableForm();
+            addVariableForm.OnSaveVariable += (variableName, terms) =>
+            {
+                if (_variables.Any(x => x.Name == variableName))
+                    return false;
+
+                _variables.Add(new LingVariable(variableName, terms));
+                return true;
+            };
             addVariableForm.ShowDialog();
 
             RefreshVariablesListView();
         }
 
-        private bool AddVariable(string variableName, List<Term> terms)
-        {
-            if (Variables.Any(x => x.Name == variableName))
-                return false;
-
-            Variables.Add(new LingVariable(variableName, terms));
-            return true;
-        }
-
-
-
         private void deleteVariable_Click(object sender, EventArgs e)
         {
-            var values = Variables.Select(x => x.Name).ToArray();
+            var values = _variables.Select(x => x.Name).ToArray();
             var deleteValueForm = new DeleteValueForm(values);
-            deleteValueForm.OnDeleteItem += DeleteVariable;
+            deleteValueForm.OnDeleteItem += (s) =>
+            {
+                var variable = this._variables.FirstOrDefault(x => x.Name == s);
+                if (variable != null)
+                    this._variables.Remove(variable);
+            };
             deleteValueForm.ShowDialog();
 
             RefreshVariablesListView();
         }
 
-        private void DeleteVariable(string name)
+        private void editVariable_Click(object sender, EventArgs e)
         {
-            var variable = Variables.FirstOrDefault(x => x.Name == name);
-            if (variable != null)
-                Variables.Remove(variable);
+            var variableViewItem = variablesListView.SelectedItems[0];
+            var variable = _variables[variableViewItem.Index];
+
+            var editVariableForm = new EditVariableForm(variable);
+            editVariableForm.OnSaveVariable += (variableName, terms) =>
+            {
+                if (terms.Count == 0)
+                    return false;
+                foreach (var term in terms)
+                {
+                    var localTerm = variable.Terms.FirstOrDefault(x => x.Name == term.Name);
+                    if (!localTerm.AccessoryFunc.IsEqual(term.AccessoryFunc))
+                        localTerm.AccessoryFunc = term.AccessoryFunc.CopyFunc();
+                }
+                return true;
+            };
+            editVariableForm.ShowDialog();
+
+            RefreshVariablesListView();
         }
-
-        
-
-
-
-
 
         private void addRule_Click(object sender, EventArgs e)
         {
-            var addRuleForm = new AddRuleForm(Variables);
-            addRuleForm.OnAddRule += AddRule;
+            var addRuleForm = new EditRuleForm(_variables);
+            addRuleForm.OnAddRule += (conditions, conclusion) =>
+            {
+                var rule = new Rule(conditions, conclusion);
+                _rules.Add(rule);
+            };
             addRuleForm.ShowDialog();
 
             RefreshRulesListView();
         }
 
-        private void AddRule(List<Condition> conditions, Conclusion conclusion)
-        {
-            var rule = new Rule(conditions, conclusion);
-            Rules.Add(rule);
-        }
-
-
-
         private void deleteRule_Click(object sender, EventArgs e)
         {
-            var values = Rules.Select(x => string.Join(",", x.ToStringArray())).ToArray();
+            var values = _rules.Select(x => string.Join(",", x.ToStringArray())).ToArray();
             var deleteValueForm = new DeleteValueForm(values);
-            deleteValueForm.OnDeleteItem += DeleteRule;
+            deleteValueForm.OnDeleteItem += (ruleString) =>
+            {
+                var rule = _rules.FirstOrDefault(x => string.Join(",", x.ToStringArray()) == ruleString);
+                if (rule != null)
+                    _rules.Remove(rule);
+            };
             deleteValueForm.ShowDialog();
 
             RefreshRulesListView();
         }
 
-        private void DeleteRule(string ruleString)
+        private void editRule_Click(object sender, EventArgs e)
         {
-            var rule = Rules.FirstOrDefault(x => string.Join(",", x.ToStringArray()) == ruleString);
-            if (rule != null)
-                Rules.Remove(rule);
+            var ruleViewItem = rulesListView.SelectedItems[0];
+            var rule = _rules[ruleViewItem.Index];
+
+            var editRuleForm = new EditRuleForm(_variables, rule);
+            editRuleForm.ShowDialog();
+
+            RefreshRulesListView();
         }
 
         private void solveProblem_Click(object sender, EventArgs e)
@@ -129,18 +160,18 @@ namespace Forms
             {
                 var inputData = GetInputData();
 
-                if (inputData.Length != Variables.Count - 1)
+                if (inputData.Length != _variables.Count - 1)
                 {
-                    throw new ArgumentException($"Некорректное число входных параметров. {inputData.Length} вместо ожидаемых {Variables.Count - 1}");
+                    throw new ArgumentException($"Некорректное число входных параметров. {inputData.Length} вместо ожидаемых {_variables.Count - 1}");
                 }
 
                 ProblemConditions conditions = new ProblemConditions();
-                foreach (var lingVariable in Variables)
+                foreach (var lingVariable in _variables)
                 {
                     conditions.AddVariable(lingVariable);
                 }
 
-                foreach (var rule in Rules)
+                foreach (var rule in _rules)
                 {
                     conditions.AddRule(rule);
                 }
@@ -162,25 +193,7 @@ namespace Forms
             }
         }
 
-        private double[] GetInputData()
-        {
-            var str = inputDataTextBox.Text;
-            var strs = str.Split(';');
-
-            var list = new List<double>();
-            foreach (var s in strs)
-            {
-                double value;
-                if (!double.TryParse(s.Replace(".", ","), out value))
-                {
-                    throw new ArgumentException("Не корректно заполнены входные данные");
-                }
-                list.Add(value);
-            }
-            return list.ToArray();
-        }
-
-        private void задача2ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void task2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input2);
 
@@ -191,11 +204,11 @@ namespace Forms
                 return;
             }
 
-            Variables.Clear();
-            Variables.AddRange(result.Data.Variables);
+            _variables.Clear();
+            _variables.AddRange(result.Data.Variables);
 
-            Rules.Clear();
-            Rules.AddRange(result.Data.Rules);
+            _rules.Clear();
+            _rules.AddRange(result.Data.Rules);
 
             inputDataTextBox.Text = "0.8;0.97;0.58;0.75;0.95";
 
@@ -203,7 +216,7 @@ namespace Forms
             RefreshRulesListView();
         }
 
-        private void задача3ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void task3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
 
@@ -214,11 +227,11 @@ namespace Forms
                 return;
             }
 
-            Variables.Clear();
-            Variables.AddRange(result.Data.Variables);
+            _variables.Clear();
+            _variables.AddRange(result.Data.Variables);
 
-            Rules.Clear();
-            Rules.AddRange(result.Data.Rules);
+            _rules.Clear();
+            _rules.AddRange(result.Data.Rules);
 
             inputDataTextBox.Text = "0.8;0.68";
 
@@ -226,7 +239,7 @@ namespace Forms
             RefreshRulesListView();
         }
 
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
             ofd.Filter = "Файлы xml|*.xml";
@@ -246,11 +259,11 @@ namespace Forms
                         return;
                     }
 
-                    Variables.Clear();
-                    Variables.AddRange(result.Data.Variables);
+                    _variables.Clear();
+                    _variables.AddRange(result.Data.Variables);
 
-                    Rules.Clear();
-                    Rules.AddRange(result.Data.Rules);
+                    _rules.Clear();
+                    _rules.AddRange(result.Data.Rules);
 
                     inputDataTextBox.Text = "";
 
@@ -260,7 +273,7 @@ namespace Forms
             }
         }
 
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var sfd = new SaveFileDialog();
             sfd.Filter = "Файлы xml|*.xml";
@@ -268,9 +281,42 @@ namespace Forms
             if (dialogResult == DialogResult.OK)
             {
                 var filePath = sfd.FileName;
-                var conditions = new ProblemConditions(Variables, Rules);
+                var conditions = new ProblemConditions(_variables, _rules);
                 ProblemSamples.WriteToFile(conditions, filePath);
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialogResult = MessageBox.Show("Вы уверены что хотите выйти?", "Предупреждение", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
+
+            if(dialogResult == DialogResult.Yes)
+                this.Close();
+        }
+        #endregion
+
+        private void task1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input1);
+
+            if (!result.Success)
+            {
+                MessageBox.Show("Во время загрузки задачи возникли непридвиденные ошибки", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _variables.Clear();
+            _variables.AddRange(result.Data.Variables);
+
+            _rules.Clear();
+            _rules.AddRange(result.Data.Rules);
+
+            inputDataTextBox.Text = "";
+
+            RefreshVariablesListView();
+            RefreshRulesListView();
         }
     }
 }

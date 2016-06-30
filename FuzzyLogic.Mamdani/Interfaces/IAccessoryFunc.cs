@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace FuzzyLogic.Mamdani.Interfaces
+﻿namespace FuzzyLogic.Mamdani.Interfaces
 {
     //Функция принадлежности
     public interface IAccessoryFunc
@@ -10,7 +8,6 @@ namespace FuzzyLogic.Mamdani.Interfaces
         void SetActivatedValue(double x);
         double GetActivatedValue(double x);
 
-        string[] ToStringArray();
-        XAttribute[] ToXAttributeArray(params string[] attributesNames);
+        bool IsEqual(IAccessoryFunc func);
     }
 }

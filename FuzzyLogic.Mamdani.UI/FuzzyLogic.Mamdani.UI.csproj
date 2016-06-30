@@ -39,29 +39,29 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRuleForm.cs">
+    <Compile Include="EditRuleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddRuleForm.Designer.cs">
-      <DependentUpon>AddRuleForm.cs</DependentUpon>
+    <Compile Include="EditRuleForm.Designer.cs">
+      <DependentUpon>EditRuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddRuleStatementForm.cs">
+    <Compile Include="EditRuleStatementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddRuleStatementForm.Designer.cs">
-      <DependentUpon>AddRuleStatementForm.cs</DependentUpon>
+    <Compile Include="EditRuleStatementForm.Designer.cs">
+      <DependentUpon>EditRuleStatementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddVariableForm.cs">
+    <Compile Include="EditVariableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddVariableForm.Designer.cs">
-      <DependentUpon>AddVariableForm.cs</DependentUpon>
+    <Compile Include="EditVariableForm.Designer.cs">
+      <DependentUpon>EditVariableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddVariableValueForm.cs">
+    <Compile Include="EditVariableValueForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddVariableValueForm.Designer.cs">
-      <DependentUpon>AddVariableValueForm.cs</DependentUpon>
+    <Compile Include="EditVariableValueForm.Designer.cs">
+      <DependentUpon>EditVariableValueForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DeleteValueForm.cs">
       <SubType>Form</SubType>
@@ -82,17 +82,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddRuleForm.resx">
-      <DependentUpon>AddRuleForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditRuleForm.resx">
+      <DependentUpon>EditRuleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddRuleStatementForm.resx">
-      <DependentUpon>AddRuleStatementForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditRuleStatementForm.resx">
+      <DependentUpon>EditRuleStatementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddVariableForm.resx">
-      <DependentUpon>AddVariableForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditVariableForm.resx">
+      <DependentUpon>EditVariableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddVariableValueForm.resx">
-      <DependentUpon>AddVariableValueForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditVariableValueForm.resx">
+      <DependentUpon>EditVariableValueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteValueForm.resx">
       <DependentUpon>DeleteValueForm.cs</DependentUpon>
@@ -141,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\input3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\input1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,21 +60,19 @@ namespace FuzzyLogic.Mamdani.Problems
         {
             foreach (var variable in variables)
             {
-                var variableNode = new XElement(StringResources.VariableNodeName, 
-                    new XAttribute(StringResources.VariableNodeNameAttribute, variable.Name)    
+                var variableNode = new XElement(StringResources.VariableNodeName,
+                    new XAttribute(StringResources.VariableNodeNameAttribute, variable.Name)
                 );
 
                 foreach (var term in variable.Terms)
                 {
                     variableNode.Add(
-                        new XElement(StringResources.TermNodeName, 
+                        new XElement(StringResources.TermNodeName,
                             new XAttribute(StringResources.TermNodeNameAttribute, term.Name),
-                            term.AccessoryFunc.ToXAttributeArray(
-                                StringResources.TermAPointAttributeName,
-                                StringResources.TermBPointAttributeName,
-                                StringResources.TermCPointAttributeName,
-                                StringResources.TermDPointAttributeName    
-                            )
+                            new XAttribute(StringResources.TermAPointAttributeName, ((TrapFunc)term.AccessoryFunc).A),
+                            new XAttribute(StringResources.TermBPointAttributeName, ((TrapFunc)term.AccessoryFunc).B),
+                            new XAttribute(StringResources.TermCPointAttributeName, ((TrapFunc)term.AccessoryFunc).C),
+                            new XAttribute(StringResources.TermDPointAttributeName, ((TrapFunc)term.AccessoryFunc).D)
                         )
                     );
                 }

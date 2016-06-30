@@ -5,10 +5,10 @@ using FuzzyLogic.Mamdani;
 
 namespace Forms
 {
-    public partial class AddRuleStatementForm : Form
+    public partial class EditRuleStatementForm : Form
     {
         private readonly List<LingVariable> _variables;
-        public AddRuleStatementForm(List<LingVariable> variables)
+        public EditRuleStatementForm(List<LingVariable> variables)
         {
             _variables = variables;
             InitializeComponent();

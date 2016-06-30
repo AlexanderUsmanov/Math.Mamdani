@@ -6,7 +6,7 @@ using FuzzyLogic.Mamdani.Statements;
 
 namespace Forms
 {
-    public partial class AddRuleForm : Form
+    public partial class EditRuleForm : Form
     {
         private readonly List<Condition> _conditions;
         private Conclusion _conclusion;
@@ -23,12 +23,22 @@ namespace Forms
         }
         private readonly List<LingVariable> _variables;
          
-        public AddRuleForm(List<LingVariable> variables)
+        public EditRuleForm(List<LingVariable> variables)
         {
             _variables = variables;
 
             _conditions = new List<Condition>();
             InitializeComponent();
+        }
+
+        public EditRuleForm(List<LingVariable> variables, Rule rule)
+            : this (variables)
+        {
+            _conditions = rule.Conditions;
+            _conclusion = rule.Conclusion;
+
+            RefreshConditionsListView();
+            RefreshConclusionListView();
         }
 
 
@@ -57,7 +67,7 @@ namespace Forms
         private void addCondition_Click(object sender, System.EventArgs e)
         {
             var variablesForRuleStatement = _variables.Where(x => !UsedVariableNames.Contains(x.Name)).ToList();
-            var addConditionForm = new AddRuleStatementForm(variablesForRuleStatement);
+            var addConditionForm = new EditRuleStatementForm(variablesForRuleStatement);
             addConditionForm.OnAddStatement += AddCondition;
             addConditionForm.ShowDialog();
 
@@ -101,7 +111,7 @@ namespace Forms
             }
 
             var variablesForRuleStatement = _variables.Where(x => !UsedVariableNames.Contains(x.Name)).ToList();
-            var addConditionForm = new AddRuleStatementForm(variablesForRuleStatement);
+            var addConditionForm = new EditRuleStatementForm(variablesForRuleStatement);
             addConditionForm.OnAddStatement += AddConclusion;
             addConditionForm.ShowDialog();
 
@@ -138,9 +148,9 @@ namespace Forms
             var closeWindow = true;
             if (OnAddRule != null)
             {
-                if (_conditions.Count < _variables.Count - 1)
+                if (_conditions.Count == 0)
                 {
-                    MessageBox.Show("Количество условий в правиле должно быть на 1 меньше числа переменных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(" возможно создать правило без условий", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     closeWindow = false;
                 }
 
