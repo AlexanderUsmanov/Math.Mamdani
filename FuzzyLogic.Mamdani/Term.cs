@@ -4,22 +4,28 @@ using FuzzyLogic.Mamdani.Interfaces;
 namespace FuzzyLogic.Mamdani
 {
     /// <summary>
-    /// Возможное значение нечеткой переменной
+    /// Значение нечеткой переменной
     /// </summary>
     public class Term
     {
-        public Term()
+        /// <summary>
+        /// Функция принадлежности
+        /// </summary>
+        public IAccessoryFunc AccessoryFunc { get; set; }
+        
+        /// <summary>
+        /// Лингвистическое значение
+        /// </summary>
+        public string Name { get; set; }
+
+        private Term()
         {
         }
-
         public Term(string name, double a, double b, double c, double d)
         {
             Name = name;
             AccessoryFunc = new TrapFunc(a, b, c, d);
         }
-
-        public IAccessoryFunc AccessoryFunc { get; set; }
-        public string Name { get; set; }
 
         public Term Clone()
         {

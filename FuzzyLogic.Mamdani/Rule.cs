@@ -28,7 +28,7 @@ namespace FuzzyLogic.Mamdani
             return list.ToArray();
         }
 
-        public static Rule Create(string input, List<LingVariable> variables)
+        public static Rule Create(string input, List<FuzzyVariable> variables)
         {
             var splitResult = input.Split(new[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
 

@@ -38,7 +38,7 @@ namespace FuzzyLogic.Mamdani.Problems
                 {
                     inputsNode.Add(
                         new XElement(StringResources.RuleVariableNodeName,
-                            new XAttribute(StringResources.RuleVariableNodeNameAttribute, condition.LingVariable.Name),
+                            new XAttribute(StringResources.RuleVariableNodeNameAttribute, condition.FuzzyVariable.Name),
                             new XAttribute(StringResources.RuleVariableNodeValueAttribute, condition.Term.Name)
                         )
                     );
@@ -46,7 +46,7 @@ namespace FuzzyLogic.Mamdani.Problems
 
                 var outputsNode = new XElement(StringResources.RuleNodeOutputSectionName,
                     new XElement(StringResources.RuleVariableNodeName,
-                        new XAttribute(StringResources.RuleVariableNodeNameAttribute, rule.Conclusion.LingVariable.Name),
+                        new XAttribute(StringResources.RuleVariableNodeNameAttribute, rule.Conclusion.FuzzyVariable.Name),
                         new XAttribute(StringResources.RuleVariableNodeValueAttribute, rule.Conclusion.Term.Name)
                     )
                 );
@@ -56,12 +56,14 @@ namespace FuzzyLogic.Mamdani.Problems
             }
         }
 
-        private static void FillVariablesNode(XElement variablesNode, List<LingVariable> variables)
+        private static void FillVariablesNode(XElement variablesNode, List<FuzzyVariable> variables)
         {
             foreach (var variable in variables)
             {
                 var variableNode = new XElement(StringResources.VariableNodeName,
-                    new XAttribute(StringResources.VariableNodeNameAttribute, variable.Name)
+                    new XAttribute(StringResources.VariableNodeNameAttribute, variable.Name),
+                    new XAttribute(StringResources.VariableNodeLingNameAtttribute, variable.LingName),
+                    new XAttribute(StringResources.VariableNodeIsResultAttribute, variable.IsResult.ToString())
                 );
 
                 foreach (var term in variable.Terms)

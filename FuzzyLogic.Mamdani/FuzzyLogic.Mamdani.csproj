@@ -41,7 +41,7 @@
     <Compile Include="MamdaniService.cs" />
     <Compile Include="Problems\ProblemConditionsWriter.cs" />
     <Compile Include="Problems\ProblemConditionsReader.cs" />
-    <Compile Include="Problems\ProblemSamples.cs" />
+    <Compile Include="Problems\ProblemConditionsHelper.cs" />
     <Compile Include="Results\ExecutionResult.cs" />
     <Compile Include="Statements\Conclusion.cs" />
     <Compile Include="Statements\Condition.cs" />
@@ -51,7 +51,7 @@
     <Compile Include="Exceptions\HasNoThatVariableException.cs" />
     <Compile Include="Exceptions\MamdaniException.cs" />
     <Compile Include="Interfaces\IMamdaniService.cs" />
-    <Compile Include="LingVariable.cs" />
+    <Compile Include="FuzzyVariable.cs" />
     <Compile Include="Problems\Problem.cs" />
     <Compile Include="Problems\ProblemConditions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +70,7 @@
     <EmbeddedResource Include="StringResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

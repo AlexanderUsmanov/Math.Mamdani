@@ -39,6 +39,9 @@
             this.addVariable = new System.Windows.Forms.Button();
             this.addValue = new System.Windows.Forms.Button();
             this.deleteValue = new System.Windows.Forms.Button();
+            this.variableLingName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.isResult = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -52,7 +55,7 @@
             // 
             // variableName
             // 
-            this.variableName.Location = new System.Drawing.Point(133, 10);
+            this.variableName.Location = new System.Drawing.Point(203, 10);
             this.variableName.Name = "variableName";
             this.variableName.Size = new System.Drawing.Size(188, 20);
             this.variableName.TabIndex = 1;
@@ -67,9 +70,9 @@
             this.d});
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(16, 43);
+            this.listView1.Location = new System.Drawing.Point(16, 87);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(305, 130);
+            this.listView1.Size = new System.Drawing.Size(375, 130);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -78,6 +81,7 @@
             // value
             // 
             this.value.Text = "Значение";
+            this.value.Width = 111;
             // 
             // a
             // 
@@ -97,9 +101,9 @@
             // 
             // addVariable
             // 
-            this.addVariable.Location = new System.Drawing.Point(16, 208);
+            this.addVariable.Location = new System.Drawing.Point(16, 252);
             this.addVariable.Name = "addVariable";
-            this.addVariable.Size = new System.Drawing.Size(305, 23);
+            this.addVariable.Size = new System.Drawing.Size(372, 23);
             this.addVariable.TabIndex = 3;
             this.addVariable.Text = "Сохранить переменную";
             this.addVariable.UseVisualStyleBackColor = true;
@@ -107,9 +111,9 @@
             // 
             // addValue
             // 
-            this.addValue.Location = new System.Drawing.Point(16, 179);
+            this.addValue.Location = new System.Drawing.Point(16, 223);
             this.addValue.Name = "addValue";
-            this.addValue.Size = new System.Drawing.Size(151, 23);
+            this.addValue.Size = new System.Drawing.Size(181, 23);
             this.addValue.TabIndex = 4;
             this.addValue.Text = "Добавить значение";
             this.addValue.UseVisualStyleBackColor = true;
@@ -117,19 +121,48 @@
             // 
             // deleteValue
             // 
-            this.deleteValue.Location = new System.Drawing.Point(170, 179);
+            this.deleteValue.Location = new System.Drawing.Point(203, 223);
             this.deleteValue.Name = "deleteValue";
-            this.deleteValue.Size = new System.Drawing.Size(151, 23);
+            this.deleteValue.Size = new System.Drawing.Size(185, 23);
             this.deleteValue.TabIndex = 5;
             this.deleteValue.Text = "Удалить значение";
             this.deleteValue.UseVisualStyleBackColor = true;
             this.deleteValue.Click += new System.EventHandler(this.deleteValue_Click);
             // 
+            // variableLingName
+            // 
+            this.variableLingName.Location = new System.Drawing.Point(203, 38);
+            this.variableLingName.Name = "variableLingName";
+            this.variableLingName.Size = new System.Drawing.Size(188, 20);
+            this.variableLingName.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(184, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Лингвистическое имя переменной";
+            // 
+            // isResult
+            // 
+            this.isResult.AutoSize = true;
+            this.isResult.Location = new System.Drawing.Point(203, 64);
+            this.isResult.Name = "isResult";
+            this.isResult.Size = new System.Drawing.Size(148, 17);
+            this.isResult.TabIndex = 8;
+            this.isResult.Text = "переменная результата";
+            this.isResult.UseVisualStyleBackColor = true;
+            // 
             // EditVariableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 243);
+            this.ClientSize = new System.Drawing.Size(400, 287);
+            this.Controls.Add(this.isResult);
+            this.Controls.Add(this.variableLingName);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.deleteValue);
             this.Controls.Add(this.addValue);
             this.Controls.Add(this.addVariable);
@@ -156,5 +189,8 @@
         private System.Windows.Forms.Button addVariable;
         private System.Windows.Forms.Button addValue;
         private System.Windows.Forms.Button deleteValue;
+        private System.Windows.Forms.TextBox variableLingName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox isResult;
     }
 }

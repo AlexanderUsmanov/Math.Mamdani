@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using FuzzyLogic.Mamdani.Exceptions;
 using FuzzyLogic.Mamdani.Interfaces;
 using FuzzyLogic.Mamdani.Problems;
+using FuzzyLogic.Mamdani.Results;
 
 namespace FuzzyLogic.Mamdani
 {
@@ -9,19 +11,43 @@ namespace FuzzyLogic.Mamdani
     {
         private StringBuilder _logBuilder;
 
-        public double SolveProblem(Problem problem)
+        public ExecutionResult<double> SolveProblem(Problem problem)
         {
             _logBuilder = new StringBuilder();
+
+            var checkResult = CheckConditions(problem.ProblemConditions);
+            if (!checkResult.Success)
+            {
+                ExecutionResult<double>.Error(checkResult.ErrorMessage);
+            }
 
             var fuzzificationResult = Fuzzificate(problem);
             var aggregationResult = Aggregate(problem, fuzzificationResult);
             var compositionResult = Composite(problem, aggregationResult);
             var defuzzificationResult = Defuzzificate(compositionResult);
 
-            return defuzzificationResult;
+            return ExecutionResult<double>.Succeded(defuzzificationResult);
         }
 
-        public double SolveProblem(ProblemConditions conditions, double[] input)
+        private ExecutionResult CheckConditions(ProblemConditions problemConditions)
+        {
+            if (problemConditions.Variables.Count(x => x.IsResult) != 1)
+                return ExecutionResult.Error("В задаче должна быть задана одна и только одна выходная переменная.");
+
+            foreach (var rule in problemConditions.Rules)
+            {
+                if (!rule.Conclusion.FuzzyVariable.IsResult)
+                    return
+                        ExecutionResult.Error(
+                            "Ошибка в правилах вывода. Заключение должно быть выражением относительно результирующей переменной. Правило с ошибкой: " +
+                            string.Join(" => ", rule.ToStringArray()) + ". Результирующая переменная - " +
+                            problemConditions.Variables.FirstOrDefault(x => x.IsResult).Name);
+            }
+
+            return ExecutionResult.Succeded();
+        }
+
+        public ExecutionResult<double> SolveProblem(ProblemConditions conditions, double[] input)
         {
             var problem = new Problem
             {
@@ -35,7 +61,7 @@ namespace FuzzyLogic.Mamdani
 
         private double[] Fuzzificate(Problem problem)
         {
-            if(problem.InputData == null)
+            if (problem.InputData == null)
                 throw new ArgumentOutOfBoundsException();
             if (problem.InputData.Length != problem.ProblemConditions.Variables.Count - 1)
                 throw new ArgumentOutOfBoundsException();
@@ -49,8 +75,8 @@ namespace FuzzyLogic.Mamdani
             {
                 foreach (var condition in rule.Conditions)
                 {
-                    var id = condition.LingVariable.Id;
-                    var variable = condition.LingVariable;
+                    var id = condition.FuzzyVariable.Id;
+                    var variable = condition.FuzzyVariable;
                     result[i] = variable.GetValueForTerm(condition.Term, problem.InputData[id]);
                     _logBuilder.Append(variable.Name + " : " + result[i] + " ");
                     i++;
@@ -122,7 +148,7 @@ namespace FuzzyLogic.Mamdani
                 y2 += compositionResult.MaxValue(x);
             }
 
-            _logBuilder.AppendLine("Результат: " + (y1/y2));
+            _logBuilder.AppendLine("Результат: " + (y1 / y2));
             _logBuilder.AppendLine("Процедура дефаззификации завершена");
 
             return y1 / y2;

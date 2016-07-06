@@ -123,50 +123,74 @@
   </data>
   <data name="RuleNodeInputSectionName" xml:space="preserve">
     <value>input</value>
+    <comment>информация о выражениях условия правила</comment>
   </data>
   <data name="RuleNodeName" xml:space="preserve">
     <value>rule</value>
+    <comment>правило</comment>
   </data>
   <data name="RuleNodeOutputSectionName" xml:space="preserve">
     <value>output</value>
+    <comment>информация о выражении заключения правила</comment>
   </data>
   <data name="RulesNodeName" xml:space="preserve">
     <value>rules</value>
+    <comment>правила</comment>
   </data>
   <data name="RuleVariableNodeName" xml:space="preserve">
     <value>variable</value>
+    <comment>выражение условия/заключения</comment>
   </data>
   <data name="RuleVariableNodeNameAttribute" xml:space="preserve">
     <value>name</value>
+    <comment>название переменной выражения</comment>
   </data>
   <data name="RuleVariableNodeValueAttribute" xml:space="preserve">
     <value>value</value>
+    <comment>значение переменной выражения</comment>
   </data>
   <data name="TermAPointAttributeName" xml:space="preserve">
     <value>a</value>
+    <comment>атрибут а трапециевидной функции принадлежности</comment>
   </data>
   <data name="TermBPointAttributeName" xml:space="preserve">
     <value>b</value>
+    <comment>атрибут b трапециевидной функции принадлежности</comment>
   </data>
   <data name="TermCPointAttributeName" xml:space="preserve">
     <value>c</value>
+    <comment>атрибут c трапециевидной функции принадлежности</comment>
   </data>
   <data name="TermDPointAttributeName" xml:space="preserve">
     <value>d</value>
+    <comment>атрибут d трапециевидной функции принадлежности</comment>
   </data>
   <data name="TermNodeName" xml:space="preserve">
     <value>term</value>
+    <comment>значение нечеткой переменной</comment>
   </data>
   <data name="TermNodeNameAttribute" xml:space="preserve">
     <value>name</value>
+    <comment>лингвистическое значение переменной</comment>
   </data>
   <data name="VariableNodeName" xml:space="preserve">
     <value>variable</value>
+    <comment>переменная</comment>
   </data>
   <data name="VariableNodeNameAttribute" xml:space="preserve">
     <value>name</value>
+    <comment>имя переменной</comment>
   </data>
   <data name="VariablesNodeName" xml:space="preserve">
     <value>variables</value>
+    <comment>переменные</comment>
+  </data>
+  <data name="VariableNodeIsResultAttribute" xml:space="preserve">
+    <value>isResult</value>
+    <comment>флаг переменной результата</comment>
+  </data>
+  <data name="VariableNodeLingNameAtttribute" xml:space="preserve">
+    <value>lingName</value>
+    <comment>лингвистическое имя переменной</comment>
   </data>
 </root>

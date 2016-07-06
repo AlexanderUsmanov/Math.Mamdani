@@ -1,6 +1,6 @@
 <problemConditions>
 	<variables>
-		<variable name="X1">
+		<variable name="X1" lingName="Степень соответствия профиля ФГОС и реализуемой ООП">
 			<term name="отсутствует" 	a="0.0" b="0.0" c="0.1" d="0.2" />
 			<term name="низкая" 		a="0.1" b="0.2" c="0.3" d="0.4" />
 			<term name="средняя" 		a="0.3" b="0.4" c="0.6" d="0.7" />
@@ -8,7 +8,7 @@
 			<term name="полное" 		a="0.85" b="0.95" c="1.0" d="1.0" />
 		</variable>
 		
-		<variable name="X2">
+		<variable name="X2" lingName="Степень обеспечения профиля">
 			<term name="отсутствует" 	a="0.0" b="0.0" c="0.1" d="0.2" />
 			<term name="низкая" 		a="0.1" b="0.2" c="0.3" d="0.4" />
 			<term name="средняя" 		a="0.3" b="0.4" c="0.6" d="0.7" />
@@ -16,24 +16,24 @@
 			<term name="полное" 		a="0.8" b="0.9" c="1.0" d="1.0" />
 		</variable>
 		
-		<variable name="X3">
+		<variable name="X3" lingName="Степень удаленности работодателя">
 			<term name="близко" 		a="0.0" b="0.0" c="0.2" d="0.3" />
 			<term name="удаленный" 		a="0.2" b="0.3" c="0.5" d="0.7" />
 			<term name="далеко" 		a="0.5" b="0.7" c="1.0" d="1.0" />
 		</variable>
 		
-		<variable name="X4">
+		<variable name="X4" lingName="Размер компенсации дополнительных затрат">
 			<term name="отсутствует" 	a="0.0" b="0.0" c="0.1" d="0.3" />
 			<term name="частичная" 		a="0.1" b="0.3" c="0.7" d="0.8" />
 			<term name="полная" 		a="0.7" b="0.8" c="1.0" d="1.0" />
 		</variable>
 		
-		<variable name="X5">
+		<variable name="X5" lingName="Реализуемость профиля">
 			<term name="нереализуем" 	a="0.0" b="0.0" c="0.55" d="0.7" />
 			<term name="реализуем" 		a="0.55" b="0.85" c="1.0" d="1.0" />
 		</variable>
 		
-		<variable name="Y">
+		<variable name="Y" lingName="Целесообразность реализации профиля" isResult="true">
 			<term name="отсутствует" 	a="0.0" b="0.0" c="0.1" d="0.2" />
 			<term name="низкая" 		a="0.1" b="0.2" c="0.3" d="0.4" />
 			<term name="средняя" 		a="0.3" b="0.4" c="0.6" d="0.7" />

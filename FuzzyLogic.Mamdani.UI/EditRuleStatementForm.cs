@@ -7,8 +7,8 @@ namespace Forms
 {
     public partial class EditRuleStatementForm : Form
     {
-        private readonly List<LingVariable> _variables;
-        public EditRuleStatementForm(List<LingVariable> variables)
+        private readonly List<FuzzyVariable> _variables;
+        public EditRuleStatementForm(List<FuzzyVariable> variables)
         {
             _variables = variables;
             InitializeComponent();

@@ -13,12 +13,14 @@ namespace Forms
             InitializeComponent();
         }
 
-        public EditVariableForm(LingVariable variable)
+        public EditVariableForm(FuzzyVariable variable)
             : this()
         {
             this.Text = "Редактирование нечеткой переменной";
             this.variableName.Text = variable.Name;
-            this.variableName.Enabled = false;
+            //this.variableName.Enabled = false;
+            this.variableLingName.Text = variable.LingName;
+            this.isResult.Checked = variable.IsResult;
             _terms = variable.Terms;
             RefreshFormListView();
         }
@@ -91,7 +93,7 @@ namespace Forms
             RefreshFormListView();
         }
 
-        public delegate bool SaveVariableDelegate(string name, List<Term> terms);
+        public delegate bool SaveVariableDelegate(string name, string lingName, bool isResult, List<Term> terms);
 
         public event SaveVariableDelegate OnSaveVariable;
 
@@ -113,7 +115,7 @@ namespace Forms
             var name = variableName.Text;
             if (OnSaveVariable != null)
             {
-                var result = OnSaveVariable(name, _terms);
+                var result = OnSaveVariable(name, variableLingName.Text, isResult.Checked, _terms);
                 if (!result)
                 {
                     closeWindow = false;

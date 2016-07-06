@@ -1,27 +1,27 @@
 ﻿namespace FuzzyLogic.Mamdani.Statements
 {
     /// <summary>
-    /// Значение нечеткой переменной
+    /// Значение нечеткой переменной (одно из выражений условия или заключения)
     /// </summary>
     public class Statement
     {
-        public LingVariable LingVariable { get; }
+        public FuzzyVariable FuzzyVariable { get; }
         public Term Term { get; }
 
-        public Statement(LingVariable variable, Term term)
+        public Statement(FuzzyVariable variable, Term term)
         {
-            LingVariable = variable;
+            FuzzyVariable = variable;
             Term = term;
         }
 
         public new string ToString()
         {
-            return LingVariable.Name + "=" + Term.Name;
+            return FuzzyVariable.Name + "=" + Term.Name;
         }
 
         public string[] ToStringArray()
         {
-            return new[] {LingVariable.Name, Term.Name};
+            return new[] {FuzzyVariable.Name, Term.Name};
         }
     }
 }

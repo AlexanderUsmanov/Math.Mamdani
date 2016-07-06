@@ -28,7 +28,7 @@ namespace FuzzyLogic.Mamdani.Results
         }
     }
 
-    public class ExecutionResult<T> : ExecutionResult where T : class 
+    public class ExecutionResult<T> : ExecutionResult 
     {
         public T Data { get; set; }
 

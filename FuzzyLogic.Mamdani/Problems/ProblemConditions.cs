@@ -9,15 +9,15 @@ namespace FuzzyLogic.Mamdani.Problems
     public class ProblemConditions
     {
         public List<Rule> Rules { get; }
-        public List<LingVariable> Variables { get; }
+        public List<FuzzyVariable> Variables { get; }
 
         public ProblemConditions()
         {
-            Variables = new List<LingVariable>();
+            Variables = new List<FuzzyVariable>();
             Rules = new List<Rule>();
         }
 
-        public ProblemConditions(List<LingVariable> variables, List<Rule> rules)
+        public ProblemConditions(List<FuzzyVariable> variables, List<Rule> rules)
         {
             Variables = variables;
             Rules = rules;
@@ -33,7 +33,7 @@ namespace FuzzyLogic.Mamdani.Problems
             get { return Rules.Count; }
         }
         
-        public void AddVariable(LingVariable variable)
+        public void AddVariable(FuzzyVariable variable)
         {
             variable.Id = Variables.Count;
             Variables.Add(variable);

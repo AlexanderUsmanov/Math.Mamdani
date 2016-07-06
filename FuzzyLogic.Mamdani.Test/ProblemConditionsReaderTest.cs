@@ -12,7 +12,7 @@ namespace FuzzyLogic.Mamdani.Test
         [TestMethod]
         public void ReadConditionsFromXmlStringTest()
         {
-            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input);
+            var result = ProblemConditionsHelper.ReadConditionsFromXmlString(Resources.input);
 
             Assert.IsTrue(result.Success);
             Assert.IsNotNull(result.Data);
@@ -23,9 +23,11 @@ namespace FuzzyLogic.Mamdani.Test
             Assert.IsTrue(result.Data.Variables.Any(x => x.Name == "X1"));
             Assert.IsTrue(result.Data.Variables.Any(x => x.Name == "X1" && x.Terms.Any(t => t.Name == "низкий")));
 
-            Assert.IsTrue(result.Data.Rules.All(x => x.Conditions.Any(c => c.LingVariable.Name == "X1")
-                                                    && x.Conditions.Any(c => c.LingVariable.Name == "X2")
-                                                    && x.Conclusion.LingVariable.Name == "Y"));
+            Assert.IsTrue(result.Data.Variables.Any(x => x.Name == "Y" && x.IsResult) && result.Data.Variables.Where(x => x.Name != "Y").All(x => !x.IsResult));
+
+            Assert.IsTrue(result.Data.Rules.All(x => x.Conditions.Any(c => c.FuzzyVariable.Name == "X1")
+                                                    && x.Conditions.Any(c => c.FuzzyVariable.Name == "X2")
+                                                    && x.Conclusion.FuzzyVariable.Name == "Y"));
         }
 
         [TestMethod]
@@ -38,7 +40,7 @@ namespace FuzzyLogic.Mamdani.Test
                 mem.Write(buffer, 0, buffer.Length);
                 mem.Seek(0, SeekOrigin.Begin);
 
-                var result = ProblemSamples.ReadConditionsFromXmlStream(mem);
+                var result = ProblemConditionsHelper.ReadConditionsFromXmlStream(mem);
                 Assert.IsTrue(result.Success);
                 Assert.IsNotNull(result.Data);
 
@@ -48,9 +50,9 @@ namespace FuzzyLogic.Mamdani.Test
                 Assert.IsTrue(result.Data.Variables.Any(x => x.Name == "X1"));
                 Assert.IsTrue(result.Data.Variables.Any(x => x.Name == "X1" && x.Terms.Any(t => t.Name == "низкий")));
 
-                Assert.IsTrue(result.Data.Rules.All(x => x.Conditions.Any(c => c.LingVariable.Name == "X1")
-                                                        && x.Conditions.Any(c => c.LingVariable.Name == "X2")
-                                                        && x.Conclusion.LingVariable.Name == "Y"));
+                Assert.IsTrue(result.Data.Rules.All(x => x.Conditions.Any(c => c.FuzzyVariable.Name == "X1")
+                                                        && x.Conditions.Any(c => c.FuzzyVariable.Name == "X2")
+                                                        && x.Conclusion.FuzzyVariable.Name == "Y"));
             }
         }
     }

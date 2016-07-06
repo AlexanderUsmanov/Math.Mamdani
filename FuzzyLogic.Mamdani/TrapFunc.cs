@@ -1,10 +1,11 @@
-﻿using System.Xml.Linq;
-using FuzzyLogic.Mamdani.Exceptions;
+﻿using FuzzyLogic.Mamdani.Exceptions;
 using FuzzyLogic.Mamdani.Interfaces;
 
 namespace FuzzyLogic.Mamdani
 {
-    //Трапециевидная функция принадлежности
+    /// <summary>
+    /// Трапециевидная функция принадлежности
+    /// </summary>
     public class TrapFunc : IAccessoryFunc
     {
         private readonly double _a;

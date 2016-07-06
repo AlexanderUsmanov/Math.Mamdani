@@ -32,6 +32,7 @@ namespace Forms
         {
             this.variablesListView = new System.Windows.Forms.ListView();
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lingName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.values = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.deleteVariable = new System.Windows.Forms.Button();
@@ -57,6 +58,12 @@ namespace Forms
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lingResultTextBox = new System.Windows.Forms.TextBox();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.руководствоПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -66,13 +73,14 @@ namespace Forms
             // 
             this.variablesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.name,
+            this.lingName,
             this.values});
             this.variablesListView.FullRowSelect = true;
             this.variablesListView.GridLines = true;
             this.variablesListView.Location = new System.Drawing.Point(6, 19);
             this.variablesListView.MultiSelect = false;
             this.variablesListView.Name = "variablesListView";
-            this.variablesListView.Size = new System.Drawing.Size(262, 120);
+            this.variablesListView.Size = new System.Drawing.Size(322, 120);
             this.variablesListView.TabIndex = 1;
             this.variablesListView.UseCompatibleStateImageBehavior = false;
             this.variablesListView.View = System.Windows.Forms.View.Details;
@@ -80,8 +88,13 @@ namespace Forms
             // 
             // name
             // 
-            this.name.Text = "Имя переменной";
-            this.name.Width = 104;
+            this.name.Text = "Имя";
+            this.name.Width = 38;
+            // 
+            // lingName
+            // 
+            this.lingName.Text = "Лингвистическое имя";
+            this.lingName.Width = 128;
             // 
             // values
             // 
@@ -95,16 +108,16 @@ namespace Forms
             this.groupBox1.Controls.Add(this.variablesListView);
             this.groupBox1.Location = new System.Drawing.Point(12, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(274, 176);
+            this.groupBox1.Size = new System.Drawing.Size(334, 176);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Переменные";
             // 
             // deleteVariable
             // 
-            this.deleteVariable.Location = new System.Drawing.Point(143, 145);
+            this.deleteVariable.Location = new System.Drawing.Point(177, 145);
             this.deleteVariable.Name = "deleteVariable";
-            this.deleteVariable.Size = new System.Drawing.Size(125, 23);
+            this.deleteVariable.Size = new System.Drawing.Size(151, 23);
             this.deleteVariable.TabIndex = 3;
             this.deleteVariable.Text = "Удалить";
             this.deleteVariable.UseVisualStyleBackColor = true;
@@ -114,7 +127,7 @@ namespace Forms
             // 
             this.addVariable.Location = new System.Drawing.Point(6, 145);
             this.addVariable.Name = "addVariable";
-            this.addVariable.Size = new System.Drawing.Size(131, 23);
+            this.addVariable.Size = new System.Drawing.Size(165, 23);
             this.addVariable.TabIndex = 2;
             this.addVariable.Text = "Добавить";
             this.addVariable.UseVisualStyleBackColor = true;
@@ -125,7 +138,7 @@ namespace Forms
             this.groupBox2.Controls.Add(this.deleteRule);
             this.groupBox2.Controls.Add(this.addRule);
             this.groupBox2.Controls.Add(this.rulesListView);
-            this.groupBox2.Location = new System.Drawing.Point(292, 32);
+            this.groupBox2.Location = new System.Drawing.Point(352, 32);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(261, 175);
             this.groupBox2.TabIndex = 3;
@@ -179,9 +192,9 @@ namespace Forms
             // 
             // solveProblem
             // 
-            this.solveProblem.Location = new System.Drawing.Point(12, 236);
+            this.solveProblem.Location = new System.Drawing.Point(473, 213);
             this.solveProblem.Name = "solveProblem";
-            this.solveProblem.Size = new System.Drawing.Size(218, 23);
+            this.solveProblem.Size = new System.Drawing.Size(140, 23);
             this.solveProblem.TabIndex = 4;
             this.solveProblem.Text = "Запустить решение задачи";
             this.solveProblem.UseVisualStyleBackColor = true;
@@ -190,20 +203,20 @@ namespace Forms
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Location = new System.Drawing.Point(298, 243);
+            this.resultLabel.Location = new System.Drawing.Point(18, 246);
             this.resultLabel.Name = "resultLabel";
-            this.resultLabel.Size = new System.Drawing.Size(59, 13);
+            this.resultLabel.Size = new System.Drawing.Size(111, 13);
             this.resultLabel.TabIndex = 5;
-            this.resultLabel.Text = "Результат";
+            this.resultLabel.Text = "Числовой результат";
             // 
             // resultTextBox
             // 
             this.resultTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.resultTextBox.Enabled = false;
-            this.resultTextBox.Location = new System.Drawing.Point(385, 240);
+            this.resultTextBox.Location = new System.Drawing.Point(174, 243);
             this.resultTextBox.Name = "resultTextBox";
             this.resultTextBox.ReadOnly = true;
-            this.resultTextBox.Size = new System.Drawing.Size(162, 20);
+            this.resultTextBox.Size = new System.Drawing.Size(439, 20);
             this.resultTextBox.TabIndex = 6;
             // 
             // label1
@@ -217,18 +230,19 @@ namespace Forms
             // 
             // inputDataTextBox
             // 
-            this.inputDataTextBox.Location = new System.Drawing.Point(238, 213);
+            this.inputDataTextBox.Location = new System.Drawing.Point(237, 213);
             this.inputDataTextBox.Name = "inputDataTextBox";
-            this.inputDataTextBox.Size = new System.Drawing.Size(309, 20);
+            this.inputDataTextBox.Size = new System.Drawing.Size(230, 20);
             this.inputDataTextBox.TabIndex = 8;
             // 
             // mainMenuStrip
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.справкаToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(560, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(623, 24);
             this.mainMenuStrip.TabIndex = 9;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -247,7 +261,7 @@ namespace Forms
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -258,48 +272,95 @@ namespace Forms
             this.task2ToolStripMenuItem,
             this.task3ToolStripMenuItem});
             this.fillToolStripMenuItem.Name = "fillToolStripMenuItem";
-            this.fillToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.fillToolStripMenuItem.Text = "Заполнить по шаблону";
+            this.fillToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.fillToolStripMenuItem.Text = "Шаблоны задач";
             // 
             // task1ToolStripMenuItem
             // 
             this.task1ToolStripMenuItem.Name = "task1ToolStripMenuItem";
-            this.task1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.task1ToolStripMenuItem.Text = "Задача 1";
+            this.task1ToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.task1ToolStripMenuItem.Text = "Оценка достоверности информации работодателей";
             this.task1ToolStripMenuItem.Click += new System.EventHandler(this.task1ToolStripMenuItem_Click);
             // 
             // task2ToolStripMenuItem
             // 
             this.task2ToolStripMenuItem.Name = "task2ToolStripMenuItem";
-            this.task2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.task2ToolStripMenuItem.Text = "Задача 2";
+            this.task2ToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.task2ToolStripMenuItem.Text = "Отбор профилей подготовки";
             this.task2ToolStripMenuItem.Click += new System.EventHandler(this.task2ToolStripMenuItem_Click);
             // 
             // task3ToolStripMenuItem
             // 
             this.task3ToolStripMenuItem.Name = "task3ToolStripMenuItem";
-            this.task3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.task3ToolStripMenuItem.Text = "Задача 3";
+            this.task3ToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.task3ToolStripMenuItem.Text = "Оценка траекторий подготовки студента";
             this.task3ToolStripMenuItem.Click += new System.EventHandler(this.task3ToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.saveAsToolStripMenuItem.Text = "Сохранить как";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 272);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(150, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Лингвистический результат";
+            // 
+            // lingResultTextBox
+            // 
+            this.lingResultTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lingResultTextBox.Enabled = false;
+            this.lingResultTextBox.Location = new System.Drawing.Point(174, 269);
+            this.lingResultTextBox.Name = "lingResultTextBox";
+            this.lingResultTextBox.ReadOnly = true;
+            this.lingResultTextBox.Size = new System.Drawing.Size(439, 20);
+            this.lingResultTextBox.TabIndex = 11;
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.руководствоПользователяToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.оПрограммеToolStripMenuItem});
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // руководствоПользователяToolStripMenuItem
+            // 
+            this.руководствоПользователяToolStripMenuItem.Name = "руководствоПользователяToolStripMenuItem";
+            this.руководствоПользователяToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.руководствоПользователяToolStripMenuItem.Text = "Руководство пользователя";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(218, 6);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -307,7 +368,9 @@ namespace Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(560, 267);
+            this.ClientSize = new System.Drawing.Size(623, 297);
+            this.Controls.Add(this.lingResultTextBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.inputDataTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resultTextBox);
@@ -358,6 +421,13 @@ namespace Forms
         private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private ColumnHeader lingName;
+        private Label label2;
+        private TextBox lingResultTextBox;
+        private ToolStripMenuItem справкаToolStripMenuItem;
+        private ToolStripMenuItem руководствоПользователяToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem оПрограммеToolStripMenuItem;
     }
 }
 

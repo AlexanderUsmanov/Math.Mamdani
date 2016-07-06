@@ -63,6 +63,16 @@ namespace FuzzyLogic.Mamdani.Problems
             return attribute;
         }
 
+        private static bool GetAttributeBoolValue(XElement element, string attributeName)
+        {
+            var attribute = element.Attribute(attributeName);
+            if (attribute == null || string.IsNullOrEmpty(attribute.Value))
+            {
+                return false;
+            }
+            return attribute.Value.ToLower() == "true";
+        }
+
         private static double ParseDouble(XAttribute attribute)
         {
             double result;
@@ -73,7 +83,7 @@ namespace FuzzyLogic.Mamdani.Problems
             return result;
         }
 
-        private static LingVariable GetVariable(List<LingVariable> variables, string name)
+        private static FuzzyVariable GetVariable(List<FuzzyVariable> variables, string name)
         {
             var variable = variables.FirstOrDefault(x => x.Name == name);
             if (variable == null)
@@ -83,7 +93,7 @@ namespace FuzzyLogic.Mamdani.Problems
             return variable;
         }
 
-        private static Term GetTerm(LingVariable variable, string name)
+        private static Term GetTerm(FuzzyVariable variable, string name)
         {
             var term = variable.Terms.FirstOrDefault(x => x.Name == name);
             if (term == null)
@@ -93,13 +103,18 @@ namespace FuzzyLogic.Mamdani.Problems
             return term;
         }
 
-        private static List<LingVariable> ReadVariables(XElement node)
+        private static List<FuzzyVariable> ReadVariables(XElement node)
         {
-            var result = new List<LingVariable>();
+            var result = new List<FuzzyVariable>();
             foreach (var variableNode in node.Elements(StringResources.VariableNodeName))
             {
                 var variableNameAttribute = GetAttriute(variableNode, StringResources.VariableNodeNameAttribute);
                 var variableName = variableNameAttribute.Value;
+
+                var variableLingNameAttribute = GetAttriute(variableNode, StringResources.VariableNodeLingNameAtttribute);
+                var variableLingName = variableLingNameAttribute.Value;
+
+                var isResultVariable = GetAttributeBoolValue(variableNode, StringResources.VariableNodeIsResultAttribute);
 
                 var terms = new List<Term>();
 
@@ -124,7 +139,7 @@ namespace FuzzyLogic.Mamdani.Problems
                     terms.Add(term);
                 }
 
-                var variable = new LingVariable(variableName, terms);
+                var variable = new FuzzyVariable(variableName, variableLingName, terms, isResultVariable);
                 result.Add(variable);
             }
             if (result.Count == 0)
@@ -135,7 +150,7 @@ namespace FuzzyLogic.Mamdani.Problems
             return result;
         }
 
-        private static List<Rule> ReadRules(XElement node, List<LingVariable> variables)
+        private static List<Rule> ReadRules(XElement node, List<FuzzyVariable> variables)
         {
             var result = new List<Rule>();
 
@@ -179,7 +194,7 @@ namespace FuzzyLogic.Mamdani.Problems
                     throw new ProblemConditionsParseException("В правиле должно быть задано заключение, т.е. элемент " + StringResources.RuleVariableNodeName + " в секции " + StringResources.RuleNodeOutputSectionName);
                 }
 
-                if (conditions.Any(x => x.LingVariable.Name == conclusion.LingVariable.Name))
+                if (conditions.Any(x => x.FuzzyVariable.Name == conclusion.FuzzyVariable.Name))
                 {
                     throw new ProblemConditionsParseException("В правиле переменные условия и заключения не должны пересекаться.");
                 }

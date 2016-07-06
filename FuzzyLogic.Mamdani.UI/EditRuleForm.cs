@@ -15,15 +15,15 @@ namespace Forms
         {
             get
             {
-                var names = _conditions.Select(x => x.LingVariable.Name).ToList();
+                var names = _conditions.Select(x => x.FuzzyVariable.Name).ToList();
                 if(_conclusion != null)
-                    names.Add(_conclusion.LingVariable.Name);
+                    names.Add(_conclusion.FuzzyVariable.Name);
                 return names;
             }
         }
-        private readonly List<LingVariable> _variables;
+        private readonly List<FuzzyVariable> _variables;
          
-        public EditRuleForm(List<LingVariable> variables)
+        public EditRuleForm(List<FuzzyVariable> variables)
         {
             _variables = variables;
 
@@ -31,7 +31,7 @@ namespace Forms
             InitializeComponent();
         }
 
-        public EditRuleForm(List<LingVariable> variables, Rule rule)
+        public EditRuleForm(List<FuzzyVariable> variables, Rule rule)
             : this (variables)
         {
             _conditions = rule.Conditions;
@@ -85,7 +85,7 @@ namespace Forms
 
         private void deleteCondition_Click(object sender, System.EventArgs e)
         {
-            var deleteConditionForm = new DeleteValueForm(_conditions.Select(c => c.LingVariable.Name).ToArray());
+            var deleteConditionForm = new DeleteValueForm(_conditions.Select(c => c.FuzzyVariable.Name).ToArray());
             deleteConditionForm.OnDeleteItem += DeleteCondition;
             deleteConditionForm.ShowDialog();
 
@@ -93,7 +93,7 @@ namespace Forms
         }
         private void DeleteCondition(string variableName)
         {
-            var condition = _conditions.FirstOrDefault(x => x.LingVariable.Name == variableName);
+            var condition = _conditions.FirstOrDefault(x => x.FuzzyVariable.Name == variableName);
             if (condition != null)
                 _conditions.Remove(condition);
         }

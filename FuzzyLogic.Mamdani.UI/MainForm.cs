@@ -10,7 +10,7 @@ namespace Forms
 {
     public partial class MainForm : Form
     {
-        private readonly List<LingVariable> _variables = new List<LingVariable>();
+        private readonly List<FuzzyVariable> _variables = new List<FuzzyVariable>();
         private readonly List<Rule> _rules = new List<Rule>();
 
         private readonly IMamdaniService _mamdaniService;
@@ -64,12 +64,12 @@ namespace Forms
         private void addVariable_Click(object sender, EventArgs e)
         {
             var addVariableForm = new EditVariableForm();
-            addVariableForm.OnSaveVariable += (variableName, terms) =>
+            addVariableForm.OnSaveVariable += (variableName, variableLingName, variableIsResult, terms) =>
             {
                 if (_variables.Any(x => x.Name == variableName))
                     return false;
 
-                _variables.Add(new LingVariable(variableName, terms));
+                _variables.Add(new FuzzyVariable(variableName, variableLingName, terms, variableIsResult));
                 return true;
             };
             addVariableForm.ShowDialog();
@@ -98,16 +98,27 @@ namespace Forms
             var variable = _variables[variableViewItem.Index];
 
             var editVariableForm = new EditVariableForm(variable);
-            editVariableForm.OnSaveVariable += (variableName, terms) =>
+            editVariableForm.OnSaveVariable += (variableName, variableLingName, variableIsResult, terms) =>
             {
                 if (terms.Count == 0)
                     return false;
+
                 foreach (var term in terms)
                 {
                     var localTerm = variable.Terms.FirstOrDefault(x => x.Name == term.Name);
                     if (!localTerm.AccessoryFunc.IsEqual(term.AccessoryFunc))
                         localTerm.AccessoryFunc = term.AccessoryFunc.CopyFunc();
                 }
+
+                if (variable.Name != variableName)
+                    variable.Name = variableName;
+
+                if (variable.LingName != variableLingName)
+                    variable.LingName = variableLingName;
+
+                if (variable.IsResult != variableIsResult)
+                    variable.IsResult = variableIsResult;
+
                 return true;
             };
             editVariableForm.ShowDialog();
@@ -182,10 +193,30 @@ namespace Forms
                     ProblemConditions = conditions
                 };
 
-                var result = _mamdaniService.SolveProblem(problem);
-                if (double.IsNaN(result) || double.IsInfinity(result))
+                var solveResult = _mamdaniService.SolveProblem(problem);
+                var result = solveResult.Data;
+
+                if (!solveResult.Success || double.IsNaN(result) || double.IsInfinity(result))
+                {
                     resultTextBox.Text = "Не удалось вычислить значение.";
-                resultTextBox.Text = result.ToString();
+                    lingResultTextBox.Text = "Не удалось вычислить значение.";
+                }
+                else
+                {
+                    resultTextBox.Text = result.ToString("F");
+                    var resultVariable = _variables.FirstOrDefault(x => x.IsResult);
+                    var lingResultText = string.Format("{0} - {1}",
+                        resultVariable.LingName,
+                        resultVariable.Terms.OrderByDescending(x => x.AccessoryFunc.GetValue(result)).FirstOrDefault().Name
+                        );
+                    lingResultTextBox.Text = lingResultText;
+                }
+
+                if (!solveResult.Success)
+                {
+                    MessageBox.Show(solveResult.ErrorMessage, "Ошибка расчетов", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
             catch (ArgumentException exc)
             {
@@ -195,7 +226,7 @@ namespace Forms
 
         private void task2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input2);
+            var result = ProblemConditionsHelper.ReadConditionsFromXmlString(Resources.input2);
 
             if (!result.Success)
             {
@@ -218,7 +249,7 @@ namespace Forms
 
         private void task3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input3);
+            var result = ProblemConditionsHelper.ReadConditionsFromXmlString(Resources.input3);
 
             if (!result.Success)
             {
@@ -250,7 +281,7 @@ namespace Forms
             {
                 using (var stream = ofd.OpenFile())
                 {
-                    var result = ProblemSamples.ReadConditionsFromXmlStream(stream);
+                    var result = ProblemConditionsHelper.ReadConditionsFromXmlStream(stream);
 
                     if (!result.Success)
                     {
@@ -282,7 +313,7 @@ namespace Forms
             {
                 var filePath = sfd.FileName;
                 var conditions = new ProblemConditions(_variables, _rules);
-                ProblemSamples.WriteToFile(conditions, filePath);
+                ProblemConditionsHelper.WriteToFile(conditions, filePath);
             }
         }
 
@@ -294,11 +325,10 @@ namespace Forms
             if(dialogResult == DialogResult.Yes)
                 this.Close();
         }
-        #endregion
 
         private void task1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = ProblemSamples.ReadConditionsFromXmlString(Resources.input1);
+            var result = ProblemConditionsHelper.ReadConditionsFromXmlString(Resources.input1);
 
             if (!result.Success)
             {
@@ -318,5 +348,12 @@ namespace Forms
             RefreshVariablesListView();
             RefreshRulesListView();
         }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Версия 1.0\n© Данилаев Д.П., Усманов А.М., 2016", "О программе", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+        #endregion
     }
 }

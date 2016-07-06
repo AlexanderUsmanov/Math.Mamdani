@@ -9,19 +9,23 @@ namespace FuzzyLogic.Mamdani.Statements
     /// </summary>
     public class Conclusion : Statement
     {
-        public Conclusion(LingVariable variable, Term term)
+        public Conclusion(FuzzyVariable variable, Term term)
             : base(variable, term)
         {
         }
 
-        public static Conclusion Create(string input, List<LingVariable> variables)
+        public static Conclusion Create(string input, List<FuzzyVariable> variables)
         {
+            Term term = null;
+            FuzzyVariable variable = null;
+
             var splitResult = input.Split('=');
             if(splitResult.Length < 2)
                 throw new ArgumentException("не найден симовл = в выражении", nameof(input));
 
-            var variable = variables.FirstOrDefault(x => x.Name == splitResult[0]);
-            var term = variable?.Terms.FirstOrDefault(x => x.Name == splitResult[1]);
+            variable = variables.FirstOrDefault(x => x.Name == splitResult[0]);
+            if(variable != null)
+                term = variable.Terms.FirstOrDefault(x => x.Name == splitResult[1]);
 
             if (variable == null)
                 throw new ArgumentException($"не найдена переменная {splitResult[0]}", nameof(input));

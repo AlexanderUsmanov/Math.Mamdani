@@ -187,6 +187,24 @@ namespace FuzzyLogic.Mamdani {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на isResult.
+        /// </summary>
+        internal static string VariableNodeIsResultAttribute {
+            get {
+                return ResourceManager.GetString("VariableNodeIsResultAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на lingName.
+        /// </summary>
+        internal static string VariableNodeLingNameAtttribute {
+            get {
+                return ResourceManager.GetString("VariableNodeLingNameAtttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на variable.
         /// </summary>
         internal static string VariableNodeName {
