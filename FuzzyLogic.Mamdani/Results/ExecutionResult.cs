@@ -2,6 +2,9 @@
 
 namespace FuzzyLogic.Mamdani.Results
 {
+    /// <summary>
+    /// Результат выполнения
+    /// </summary>
     public class ExecutionResult
     {
         public bool Success { get; set; }

@@ -1,24 +1,36 @@
 ﻿namespace FuzzyLogic.Mamdani.Statements
 {
     /// <summary>
-    /// Значение нечеткой переменной (одно из выражений условия или заключения)
+    /// Выражение (определенное значение определенной переменной)
     /// </summary>
-    public class Statement
+    public abstract class Statement
     {
+        /// <summary>
+        /// Нечеткая переменная
+        /// </summary>
         public FuzzyVariable FuzzyVariable { get; }
+        /// <summary>
+        /// Значение
+        /// </summary>
         public Term Term { get; }
 
-        public Statement(FuzzyVariable variable, Term term)
+        protected Statement(FuzzyVariable variable, Term term)
         {
             FuzzyVariable = variable;
             Term = term;
         }
 
+        /// <summary>
+        /// Для отображения в таблицах
+        /// </summary>
         public new string ToString()
         {
             return FuzzyVariable.Name + "=" + Term.Name;
         }
 
+        /// <summary>
+        /// Для отображения в таблицах
+        /// </summary>
         public string[] ToStringArray()
         {
             return new[] {FuzzyVariable.Name, Term.Name};

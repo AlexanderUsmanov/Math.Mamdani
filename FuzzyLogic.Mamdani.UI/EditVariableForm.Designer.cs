@@ -150,9 +150,9 @@
             this.isResult.AutoSize = true;
             this.isResult.Location = new System.Drawing.Point(203, 64);
             this.isResult.Name = "isResult";
-            this.isResult.Size = new System.Drawing.Size(148, 17);
+            this.isResult.Size = new System.Drawing.Size(141, 17);
             this.isResult.TabIndex = 8;
-            this.isResult.Text = "переменная результата";
+            this.isResult.Text = "Выходная переменная";
             this.isResult.UseVisualStyleBackColor = true;
             // 
             // EditVariableForm

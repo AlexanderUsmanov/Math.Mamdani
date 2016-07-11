@@ -7,10 +7,16 @@ using FuzzyLogic.Mamdani.Results;
 
 namespace FuzzyLogic.Mamdani
 {
+    /// <summary>
+    /// Базовая реализация IMamdaniService
+    /// </summary>
     public class MamdaniService : IMamdaniService
     {
         private StringBuilder _logBuilder;
 
+        /// <summary>
+        /// Решение задачи нечеткой логики
+        /// </summary>
         public ExecutionResult<double> SolveProblem(Problem problem)
         {
             _logBuilder = new StringBuilder();
@@ -29,6 +35,9 @@ namespace FuzzyLogic.Mamdani
             return ExecutionResult<double>.Succeded(defuzzificationResult);
         }
 
+        /// <summary>
+        /// Проверка ограничений
+        /// </summary>
         private ExecutionResult CheckConditions(ProblemConditions problemConditions)
         {
             if (problemConditions.Variables.Count(x => x.IsResult) != 1)
@@ -47,6 +56,9 @@ namespace FuzzyLogic.Mamdani
             return ExecutionResult.Succeded();
         }
 
+        /// <summary>
+        /// Решение задачи нечеткой логики
+        /// </summary>
         public ExecutionResult<double> SolveProblem(ProblemConditions conditions, double[] input)
         {
             var problem = new Problem
@@ -57,8 +69,14 @@ namespace FuzzyLogic.Mamdani
             return SolveProblem(problem);
         }
 
+        /// <summary>
+        /// Получение лога выполнения операций
+        /// </summary>
         public string GetLog => _logBuilder?.ToString();
 
+        /// <summary>
+        /// Фаззификация
+        /// </summary>
         private double[] Fuzzificate(Problem problem)
         {
             if (problem.InputData == null)
@@ -88,6 +106,9 @@ namespace FuzzyLogic.Mamdani
             return result;
         }
 
+        /// <summary>
+        /// Агрегация
+        /// </summary>
         private double[] Aggregate(Problem problem, double[] fuzzificationResult)
         {
             int i = 0;
@@ -114,6 +135,9 @@ namespace FuzzyLogic.Mamdani
             return result;
         }
 
+        /// <summary>
+        /// Композиция
+        /// </summary>
         private UnionOfTerms Composite(Problem problem, double[] aggregationResult)
         {
             var result = new UnionOfTerms();
@@ -133,6 +157,9 @@ namespace FuzzyLogic.Mamdani
             return result;
         }
 
+        /// <summary>
+        /// Дефаззификация
+        /// </summary>
         private double Defuzzificate(UnionOfTerms compositionResult)
         {
             double x, y1 = 0.0, y2 = 0.0, step = 0.01;

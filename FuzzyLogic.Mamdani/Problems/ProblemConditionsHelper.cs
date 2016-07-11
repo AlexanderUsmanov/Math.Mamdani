@@ -5,8 +5,14 @@ using FuzzyLogic.Mamdani.Results;
 
 namespace FuzzyLogic.Mamdani.Problems
 {
+    /// <summary>
+    /// Класс реализующий функции загрузки/выгрузки в формате xml
+    /// </summary>
     public static class ProblemConditionsHelper
     {
+        /// <summary>
+        /// Загрузка из файла xml
+        /// </summary>
         public static ExecutionResult<ProblemConditions> ReadConditionsFromXmlStream(Stream stream)
         {
             try
@@ -28,6 +34,9 @@ namespace FuzzyLogic.Mamdani.Problems
             }
         }
 
+        /// <summary>
+        /// Загрузка из текста xml
+        /// </summary>
         public static ExecutionResult<ProblemConditions> ReadConditionsFromXmlString(string xmlString)
         {
             try
@@ -49,6 +58,9 @@ namespace FuzzyLogic.Mamdani.Problems
             }
         }
 
+        /// <summary>
+        /// Запись в файл xml
+        /// </summary>
         public static void WriteToFile(ProblemConditions conditions, string filePath)
         {
             ProblemConditionsWriter.WriteXmlToFile(conditions, filePath);

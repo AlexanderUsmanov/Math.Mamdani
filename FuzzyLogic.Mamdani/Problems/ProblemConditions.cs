@@ -8,7 +8,14 @@ namespace FuzzyLogic.Mamdani.Problems
     /// </summary>
     public class ProblemConditions
     {
+        /// <summary>
+        /// Правила вывода
+        /// </summary>
         public List<Rule> Rules { get; }
+
+        /// <summary>
+        /// Нечеткие переменные
+        /// </summary>
         public List<FuzzyVariable> Variables { get; }
 
         public ProblemConditions()
@@ -23,22 +30,28 @@ namespace FuzzyLogic.Mamdani.Problems
             Rules = rules;
         }
 
-        public int NumberOfConditions
-        {
-            get { return Rules.Select(x => x.Conditions.Count).Sum(); }
-        }
+        /// <summary>
+        /// Число условий
+        /// </summary>
+        public int NumberOfConditions { get { return Rules.Select(x => x.Conditions.Count).Sum(); } }
 
-        public int NumberOfConclusions
-        {
-            get { return Rules.Count; }
-        }
+        /// <summary>
+        /// Число заключений
+        /// </summary>
+        public int NumberOfConclusions { get { return Rules.Count; } }
         
+        /// <summary>
+        /// Добавление переменной
+        /// </summary>
         public void AddVariable(FuzzyVariable variable)
         {
             variable.Id = Variables.Count;
             Variables.Add(variable);
         }
 
+        /// <summary>
+        /// Добавление правила вывода
+        /// </summary>
         public void AddRule(Rule rule)
         {
             Rules.Add(rule);

@@ -50,7 +50,16 @@ namespace Forms
         }
         private void RefreshConclusionListView()
         {
-            var values = new [] { _conclusion.ToStringArray()};
+            string[][] values;
+            if (_conclusion != null)
+            {
+                values = new[] {_conclusion.ToStringArray()};
+            }
+            else
+            {
+                values = new[] { new [] {"", ""}};
+            }
+            
             RefreshListView(conclusionListView, values);
         }
         public void RefreshListView(ListView listView, IEnumerable<string[]> values)
